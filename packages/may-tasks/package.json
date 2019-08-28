@@ -1,0 +1,42 @@
+{
+	"name": "may-tasks",
+	"version": "1.0.0",
+	"description": "Configuration and tasks for May.",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ndeviant/may.git",
+		"directory": "packages/may-tasks"
+	},
+	"license": "MIT",
+	"engines": {
+		"node": ">=8.10"
+	},
+	"bugs": {
+		"url": "https://github.com/ndeviant/may/issues"
+	},
+	"files": [
+		"bin",
+		"config",
+		"scripts",
+		"template",
+		"utils"
+	],
+	"bin": {
+		"may-tasks": "./bin/index.js"
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"dependencies": {
+		"cross-spawn": "^6.0.5"
+	}
+}
