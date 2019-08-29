@@ -1,5 +1,5 @@
-import path from "path";
-import { config } from "./gulp.config";
+const path = require("path"); 
+const { config } = require("./gulp.config"); 
 
 const { dist, assets } = config.root;
 const distAssets = assets.replace(dist, "");
@@ -30,4 +30,4 @@ const filters = [
 	},
 ];
 
-export default filters;
+module.exports.filters = filters;

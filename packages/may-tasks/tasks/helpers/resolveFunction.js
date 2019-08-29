@@ -5,4 +5,4 @@ const resolveFunction = (userOption, defaultOption) => {
 	return userOption(defaultOption);
 };
 
-export { resolveFunction };
+module.exports.resolveFunction = resolveFunction;

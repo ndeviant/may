@@ -1,8 +1,8 @@
-import gulp from "gulp";
-import clean from "gulp-clean";
-import debug from "gulp-debug";
+const gulp  = require("gulp");
+const clean = require("gulp-clean"); 
+const debug = require("gulp-debug"); 
 
-import { config } from "./helpers/gulp.config";
+const { config } = require("./helpers/gulp.config"); 
 
 const cleanFiles = () =>
 	gulp
@@ -16,4 +16,4 @@ const cleanFiles = () =>
 			}),
 		);
 
-export { cleanFiles };
+module.exports.cleanFiles = cleanFiles;

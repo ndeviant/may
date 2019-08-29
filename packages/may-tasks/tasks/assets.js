@@ -1,8 +1,8 @@
-import gulp from "gulp";
-import debug from "gulp-debug";
-import changed from "gulp-changed";
+const gulp = require("gulp"); 
+const debug = require("gulp-debug"); 
+const changed = require("gulp-changed"); 
 
-import { config } from "./helpers/gulp.config";
+const { config } = require("./helpers/gulp.config"); 
 
 const assets = () =>
 	gulp
@@ -15,4 +15,4 @@ const assets = () =>
 			}),
 		);
 
-export { assets };
+module.exports.assets = assets;

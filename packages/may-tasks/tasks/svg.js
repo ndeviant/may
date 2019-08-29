@@ -1,11 +1,11 @@
-import gulp from "gulp";
-import plumber from "gulp-plumber";
-import debug from "gulp-debug";
-import svgSprite from "gulp-svg-sprite";
-import browsersync from "browser-sync";
+const gulp = require("gulp"); 
+const plumber = require("gulp-plumber"); 
+const debug = require("gulp-debug"); 
+const svgSprite = require("gulp-svg-sprite"); 
+const browsersync = require("browser-sync"); 
 
-import { plumbed } from "./helpers/plumbed";
-import { config } from "./helpers/gulp.config";
+const { plumbed } = require("./helpers/plumbed"); 
+const { config } = require("./helpers/gulp.config"); 
 
 const svg = () =>
 	gulp
@@ -43,4 +43,4 @@ const svg = () =>
 		)
 		.on("end", browsersync.reload);
 
-export { svg };
+module.exports.svg = svg;

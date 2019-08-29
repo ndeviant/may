@@ -1,0 +1,29 @@
+/**
+ *  Even if you wouldn't use bootstrap, for it's components,
+ *  thats will be good, to name variables using some standart.
+ *  By default used bootstrap approach:
+ *  https://github.com/twbs/bootstrap/blob/master/scss/_variables.scss
+ */
+
+// Typo
+$font-family-base: "Roboto", sans-serif;
+$font-family-accent: $font-family-base;
+
+// Colors
+$primary: #00BE00;
+$secondary: $primary;
+
+$success: #28a745;
+$info: #17a2b8;
+$warning: #ffc107;
+$danger: #dc3545;
+$light: #f8f9fa;
+$dark: #222;
+
+$link-color: $primary;
+
+$body-bg: #fff;
+$body-color: rgba($dark, 0.9);
+
+// Shape
+$btn-border-radius: 100rem;

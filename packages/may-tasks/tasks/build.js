@@ -1,20 +1,23 @@
-import gulp from "gulp";
+const gulp = require("gulp");
 
-import { cleanFiles } from "./cleanFiles";
-import { favs } from "./favs";
-import { htaccess } from "./htaccess";
-import { images } from "./images";
-import { scripts } from "./scripts";
-import { styles } from "./styles";
-import { svg } from "./svg";
-import { views } from "./views";
-import { webp } from "./webp";
-import { assets } from "./assets";
-import { config } from "./helpers/gulp.config";
+const { cleanFiles } = require("./cleanFiles");
+const { favs } = require("./favs");
+const { images } = require("./images");
+const { scripts } = require("./scripts");
+const { styles } = require("./styles");
+const { svg } = require("./svg");
+const { views } = require("./views");
+const { webp } = require("./webp");
+const { assets } = require("./assets");
+const { htaccess } = require("./htaccess");
+
+const { setNodeEnv } = require("./helpers/setNodeEnv");
+const { config } = require("./helpers/gulp.config");
 
 const { tasks } = config;
 
 const activeTasks = [
+	setNodeEnv("production"),
 	tasks.cleanFiles.run ? cleanFiles : false,
 	tasks.htaccess.run ? htaccess : false,
 	tasks.views.run ? views : false,
@@ -29,4 +32,4 @@ const activeTasks = [
 
 const build = gulp.series(...activeTasks);
 
-export { build };
+module.exports.build = build;

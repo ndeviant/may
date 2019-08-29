@@ -1,17 +1,18 @@
-import gulp from "gulp";
+const gulp = require("gulp");
 
-import { cleanFiles } from "./cleanFiles";
-import { favs } from "./favs";
-import { images } from "./images";
-import { scripts } from "./scripts";
-import { styles } from "./styles";
-import { svg } from "./svg";
-import { views } from "./views";
-import { webp } from "./webp";
-import { assets } from "./assets";
-import { server } from "./server";
+const { cleanFiles } = require("./cleanFiles");
+const { favs } = require("./favs");
+const { images } = require("./images");
+const { scripts } = require("./scripts");
+const { styles } = require("./styles");
+const { svg } = require("./svg");
+const { views } = require("./views");
+const { webp } = require("./webp");
+const { assets } = require("./assets");
+const { server } = require("./server");
 
-import { config } from "./helpers/gulp.config";
+const { setNodeEnv } = require("./helpers/setNodeEnv");
+const { config } = require("./helpers/gulp.config");
 
 const { tasks } = config;
 
@@ -30,9 +31,10 @@ const additionalTasks = [
 ].filter(Boolean);
 
 const develop = gulp.series(
+	setNodeEnv(),
 	cleanFiles,
 	gulp.parallel(...activeTasks),
 	gulp.parallel(server, ...additionalTasks),
 );
 
-export { develop };
+module.exports.develop = develop;

@@ -1,7 +1,7 @@
-import gulp from "gulp";
-import debug from "gulp-debug";
+const gulp = require("gulp"); 
+const debug = require("gulp-debug"); 
 
-import { config } from "./helpers/gulp.config";
+const { config } = require("./helpers/gulp.config"); 
 
 const htaccess = () =>
 	gulp
@@ -13,4 +13,4 @@ const htaccess = () =>
 			}),
 		);
 
-export { htaccess };
+module.exports.htaccess = htaccess;

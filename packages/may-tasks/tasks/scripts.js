@@ -1,14 +1,14 @@
-import gulp from "gulp";
-import gulpif from "gulp-if";
-import browsersync from "browser-sync";
-import rename from "gulp-rename";
-import debug from "gulp-debug";
-import webpack from "webpack";
-import webpackStream from "webpack-stream";
+const gulp = require("gulp"); 
+const debug = require("gulp-debug"); 
+const gulpif = require("gulp-if"); 
+const browsersync = require("browser-sync"); 
+const rename = require("gulp-rename"); 
+const webpack = require("webpack"); 
+const webpackStream = require("webpack-stream"); 
 
-import { config } from "./helpers/gulp.config";
-import { isProduction } from "./helpers/isProduction";
-import webpackConfig from "../webpack.config.babel";
+const { config } = require("./helpers/gulp.config"); 
+const { isProduction } = require("./helpers/isProduction"); 
+const webpackConfig = require("../webpack.config"); 
 
 const scripts = () =>
 	gulp
@@ -19,7 +19,7 @@ const scripts = () =>
 		)
 		.pipe(
 			gulpif(
-				isProduction,
+				isProduction(),
 				rename({
 					suffix: ".min",
 				}),
@@ -33,4 +33,4 @@ const scripts = () =>
 		)
 		.on("end", browsersync.reload);
 
-export { scripts };
+module.exports.scripts = scripts;

@@ -1,17 +1,17 @@
-import gulp from "gulp";
-import gulpif from "gulp-if";
-import browsersync from "browser-sync";
-import debug from "gulp-debug";
-import changed from "gulp-changed";
-import imagemin from "gulp-imagemin";
-import imageminPngquant from "imagemin-pngquant";
-import imageminZopfli from "imagemin-zopfli";
-import imageminMozjpeg from "imagemin-mozjpeg";
-import imageminGiflossy from "imagemin-giflossy";
+const gulp = require("gulp"); 
+const debug = require("gulp-debug"); 
+const gulpif = require("gulp-if"); 
+const browsersync = require("browser-sync"); 
+const changed = require("gulp-changed"); 
+const imagemin = require("gulp-imagemin"); 
+const imageminPngquant = require("imagemin-pngquant"); 
+const imageminZopfli = require("imagemin-zopfli"); 
+const imageminMozjpeg = require("imagemin-mozjpeg"); 
+const imageminGiflossy = require("imagemin-giflossy"); 
 
-import { plumbed } from "./helpers/plumbed";
-import { config } from "./helpers/gulp.config";
-import { isProduction } from "./helpers/isProduction";
+const { plumbed } = require("./helpers/plumbed"); 
+const { config } = require("./helpers/gulp.config"); 
+const { isProduction } = require("./helpers/isProduction"); 
 
 const images = () =>
 	gulp
@@ -20,7 +20,7 @@ const images = () =>
 		.pipe(changed(config.tasks.images.dist))
 		.pipe(
 			gulpif(
-				isProduction,
+				isProduction(),
 				imagemin([
 					imageminGiflossy({
 						optimizationLevel: 3,
@@ -61,4 +61,4 @@ const images = () =>
 		)
 		.on("end", browsersync.reload);
 
-export { images };
+module.exports.images = images;

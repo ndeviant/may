@@ -1,8 +1,8 @@
-import gulp from "gulp";
-import debug from "gulp-debug";
-import favicons from "gulp-favicons";
+const gulp = require("gulp"); 
+const debug = require("gulp-debug"); 
+const favicons = require("gulp-favicons"); 
 
-import { config } from "./helpers/gulp.config";
+const { config } = require("./helpers/gulp.config"); 
 
 const favs = () =>
 	gulp
@@ -30,4 +30,4 @@ const favs = () =>
 			}),
 		);
 
-export { favs };
+module.exports.favs = favs;

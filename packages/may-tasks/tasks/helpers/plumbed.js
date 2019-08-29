@@ -1,5 +1,5 @@
-import notify from "gulp-notify";
-import plumber from "gulp-plumber";
+const notify = require("gulp-notify"); 
+const plumber = require("gulp-plumber"); 
 
 const plumbed = title =>
 	plumber({
@@ -10,4 +10,4 @@ const plumbed = title =>
 		})),
 	});
 
-export { plumbed };
+module.exports.plumbed = plumbed;

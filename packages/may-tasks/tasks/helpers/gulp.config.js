@@ -1,5 +1,6 @@
-import { options as userOptions } from "../../may.config";
-import { resolveFunction } from "./resolveFunction";
+const { resolveFunction } = require("./resolveFunction");
+
+const userOptions = require("../../may.config");
 
 /**
  * Root paths:
@@ -236,4 +237,4 @@ const config = {
 	tasks,
 };
 
-export { config };
+module.exports.config = config;

@@ -1,0 +1,16 @@
+.btn {
+	border-radius: $btn-border-radius;
+	border: none;
+	background-color: $dark;
+	color: #fff;
+	padding: 10px 20px;
+	transition: background-color 0.3s;
+
+	&:hover {
+		background-color: lighten($dark, 10%);
+	}
+
+	&:focus {
+		outline: none;
+	}
+}

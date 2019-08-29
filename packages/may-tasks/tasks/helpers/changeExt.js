@@ -1,10 +1,10 @@
-import gulp from "gulp";
-import clean from "gulp-clean";
-import rename from "gulp-rename";
-import { argv } from "yargs";
+const gulp = require("gulp"); 
+const clean = require("gulp-clean"); 
+const rename = require("gulp-rename"); 
+const { argv } = require("yargs");
 
-import { plumbed } from "./plumbed";
-import { config } from "./gulp.config";
+const { plumbed } = require("./plumbed"); 
+const { config } = require("./gulp.config"); 
 
 const { from, to } = argv;
 
@@ -21,4 +21,4 @@ const changeExt = () =>
 		)
 		.pipe(gulp.dest(`${config.root.src}/`));
 
-export { changeExt };
+module.exports.changeExt = changeExt;

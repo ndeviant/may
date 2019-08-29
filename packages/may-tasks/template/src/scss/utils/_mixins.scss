@@ -1,0 +1,64 @@
+@mixin placeholder() {
+	&::-webkit-input-placeholder {
+		@content;
+	}
+
+	&::-moz-placeholder {
+		@content;
+	}
+
+	&:-moz-placeholder {
+		@content;
+	}
+
+	&:-ms-input-placeholder {
+		@content;
+	}
+
+	&::placeholder {
+		@content;
+	}
+}
+
+@mixin font-face(
+	$font-family,
+	$file-path,
+	$weight: normal,
+	$style: normal,
+	$asset-pipeline: false
+) {
+	@font-face {
+		font-family: $font-family;
+		font-weight: $weight;
+		font-style: $style;
+		src: url("#{$file-path}.woff2") format("woff2"),
+			url("#{$file-path}.woff") format("woff"),
+			url("#{$file-path}.ttf") format("truetype");
+	}
+}
+
+// Aliases for bootstrap media queries
+
+@mixin media-up($breakpoint) {
+	@include media-breakpoint-up($breakpoint) {
+		@content;
+	}
+}
+
+@mixin media-down($breakpoint) {
+	@include media-breakpoint-down($breakpoint) {
+		@content;
+	}
+}
+
+@mixin media-between($breakpoint) {
+	@include media-breakpoint-between($breakpoint) {
+		@content;
+	}
+}
+
+@mixin media-only($breakpoint) {
+	@include media-breakpoint-only($breakpoint) {
+		@content;
+	}
+}

@@ -1,3 +1,3 @@
-import { argv } from "yargs";
+const isProduction = () => process.env.NODE_ENV === "production";
 
-export const isProduction = !!argv.production;
+module.exports.isProduction = isProduction;

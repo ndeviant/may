@@ -1,0 +1,29 @@
+{% import "utils/macro.htm" as macro %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include "includes/head.htm" %}
+
+    {% block title %}
+      <title>{{ title }}</title>
+    {% endblock %}
+
+    {% block head %}{% endblock %}
+  </head>
+  <body>
+    <div class="layout">
+      {% include "partials/layout/header.htm" %}
+
+      <main
+        class="layout__main {% block layout_main_class %}{% endblock %}">
+        {# You write code for this content block in another file #}
+        {% block content %}{% endblock %}
+      </main>
+
+      {% include "partials/layout/footer.htm" %}
+    </div>
+
+    {% include "includes/scripts.htm" %}
+  </body>
+</html>

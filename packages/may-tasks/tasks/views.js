@@ -1,14 +1,16 @@
-import gulp from "gulp";
-import gulpif from "gulp-if";
-import replace from "gulp-replace";
-import twig from "gulp-twig";
-import browsersync from "browser-sync";
 
-import { plumbed } from "./helpers/plumbed";
-import { config } from "./helpers/gulp.config";
-import { isProduction } from "./helpers/isProduction";
-import data from "../template.data";
-import filters from "./helpers/octoberFilters";
+const gulp = require("gulp"); 
+const replace = require("gulp-replace"); 
+const twig = require("gulp-twig"); 
+const gulpif = require("gulp-if"); 
+const browsersync = require("browser-sync"); 
+
+const { plumbed } = require("./helpers/plumbed"); 
+const { config } = require("./helpers/gulp.config"); 
+const { isProduction } = require("./helpers/isProduction"); 
+const { filters } = require("./helpers/octoberFilters"); 
+
+const data = require("../template.data");
 
 const views = () =>
 	gulp
@@ -21,10 +23,10 @@ const views = () =>
 				filters,
 			}),
 		)
-		.pipe(gulpif(isProduction, replace("main.css", "main.min.css")))
-		.pipe(gulpif(isProduction, replace("vendor.js", "vendor.min.js")))
-		.pipe(gulpif(isProduction, replace("main.js", "main.min.js")))
+		.pipe(gulpif(isProduction(), replace("main.css", "main.min.css")))
+		.pipe(gulpif(isProduction(), replace("vendor.js", "vendor.min.js")))
+		.pipe(gulpif(isProduction(), replace("main.js", "main.min.js")))
 		.pipe(gulp.dest(config.tasks.views.dist))
 		.on("end", browsersync.reload);
 
-export { views };
+module.exports.views = views;

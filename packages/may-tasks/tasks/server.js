@@ -1,16 +1,16 @@
-import gulp from "gulp";
-import browsersync from "browser-sync";
+const gulp = require("gulp");
+const browsersync = require("browser-sync");
 
-import { favs } from "./favs";
-import { images } from "./images";
-import { scripts } from "./scripts";
-import { styles } from "./styles";
-import { svg } from "./svg";
-import { views } from "./views";
-import { webp } from "./webp";
-import { assets } from "./assets";
+const { favs } = require("./favs");
+const { images } = require("./images");
+const { scripts } = require("./scripts");
+const { styles } = require("./styles");
+const { svg } = require("./svg");
+const { views } = require("./views");
+const { webp } = require("./webp");
+const { assets } = require("./assets");
 
-import { config } from "./helpers/gulp.config";
+const { config } = require("./helpers/gulp.config");
 
 const { bsyncConfig, tasks } = config;
 
@@ -50,4 +50,4 @@ const server = () => {
 	}
 };
 
-export { server };
+module.exports.server = server;

@@ -1,4 +1,4 @@
-import { isProduction } from "./tasks/helpers/isProduction";
+const { isProduction } = require("./tasks/helpers/isProduction");
 
 const webpackConfig = {
 	output: {
@@ -37,7 +37,7 @@ const webpackConfig = {
 	plugins: [],
 };
 
-webpackConfig.mode = isProduction ? "production" : "development";
-webpackConfig.devtool = isProduction ? false : "cheap-eval-source-map";
+webpackConfig.mode = isProduction() ? "production" : "development";
+webpackConfig.devtool = isProduction() ? false : "cheap-eval-source-map";
 
-export default webpackConfig;
+module.exports = webpackConfig;

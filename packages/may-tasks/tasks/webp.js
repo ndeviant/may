@@ -1,13 +1,13 @@
-import gulp from "gulp";
-import gulpif from "gulp-if";
-import changed from "gulp-changed";
-import imageminWebp from "imagemin-webp";
-import gulpwebp from "gulp-webp";
-import debug from "gulp-debug";
+const gulp = require("gulp"); 
+const debug = require("gulp-debug"); 
+const gulpif = require("gulp-if"); 
+const changed = require("gulp-changed"); 
+const gulpwebp = require("gulp-webp"); 
+const imageminWebp = require("imagemin-webp"); 
 
-import { plumbed } from "./helpers/plumbed";
-import { config } from "./helpers/gulp.config";
-import { isProduction } from "./helpers/isProduction";
+const { plumbed } = require("./helpers/plumbed"); 
+const { config } = require("./helpers/gulp.config"); 
+const { isProduction } = require("./helpers/isProduction"); 
 
 const webp = () =>
 	gulp
@@ -17,7 +17,7 @@ const webp = () =>
 		.pipe(
 			gulpwebp(
 				gulpif(
-					isProduction,
+					isProduction(),
 					imageminWebp({
 						lossless: true,
 						quality: 90,
@@ -33,4 +33,4 @@ const webp = () =>
 			}),
 		);
 
-export { webp };
+module.exports.webp = webp;

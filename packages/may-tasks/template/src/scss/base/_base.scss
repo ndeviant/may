@@ -1,0 +1,93 @@
+/**
+ * Basic styles for tags
+ */
+
+::selection {
+	color: #fff;
+	background: $primary;
+}
+
+* {
+	box-sizing: border-box;
+
+	@include placeholder {
+		color: #666;
+		opacity: 1;
+	}
+}
+
+body {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	min-width: 320px;
+	font-size: 16px;
+	line-height: 1.5;
+	font-family: $font-family-base;
+	color: $body-color;
+}
+
+code {
+	background: #f2f2f2;
+	padding: 4px 8px;
+	border-radius: 4px;
+	margin: 0 4px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: 600;
+}
+
+h1 {
+	font-size: 2rem;
+}
+
+h2 {
+	font-size: 1.75rem;
+}
+
+h3 {
+	font-size: 1.5rem;
+}
+
+h4 {
+	font-size: 1.325rem;
+}
+
+h5 {
+	font-size: 1.25rem;
+}
+
+h6 {
+	font-size: 1.125rem;
+}
+
+.h1 {
+	@extend h1;
+}
+
+.h2 {
+	@extend h2;
+}
+
+.h3 {
+	@extend h3;
+}
+
+.h4 {
+	@extend h4;
+}
+
+.h5 {
+	@extend h5;
+}
+
+.h6 {
+	@extend h6;
+}

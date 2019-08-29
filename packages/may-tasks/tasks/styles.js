@@ -1,25 +1,25 @@
-import gulp from "gulp";
-import gulpif from "gulp-if";
-import plumber from "gulp-plumber";
-import browsersync from "browser-sync";
-import autoprefixer from "autoprefixer";
-import sass from "gulp-sass";
-import mqpacker from "css-mqpacker";
-import sortCSSmq from "sort-css-media-queries";
-import mincss from "gulp-clean-css";
-import postcss from "gulp-postcss";
-import sourcemaps from "gulp-sourcemaps";
-import rename from "gulp-rename";
-import debug from "gulp-debug";
+const gulp = require("gulp"); 
+const debug = require("gulp-debug"); 
+const gulpif = require("gulp-if"); 
+const plumber = require("gulp-plumber"); 
+const sass = require("gulp-sass"); 
+const mqpacker = require("css-mqpacker"); 
+const sortCSSmq = require("sort-css-media-queries"); 
+const mincss = require("gulp-clean-css"); 
+const autoprefixer = require("autoprefixer"); 
+const browsersync = require("browser-sync"); 
+const postcss = require("gulp-postcss"); 
+const sourcemaps = require("gulp-sourcemaps"); 
+const rename = require("gulp-rename"); 
 
-import { plumbed } from "./helpers/plumbed";
-import { config } from "./helpers/gulp.config";
-import { isProduction } from "./helpers/isProduction";
+const { plumbed } = require("./helpers/plumbed"); 
+const { config } = require("./helpers/gulp.config"); 
+const { isProduction } = require("./helpers/isProduction"); 
 
 const styles = () =>
 	gulp
 		.src(config.tasks.styles.src)
-		.pipe(gulpif(!isProduction, sourcemaps.init()))
+		.pipe(gulpif(!isProduction(), sourcemaps.init()))
 		.pipe(plumbed("Styles"))
 		.pipe(
 			sass({
@@ -32,13 +32,13 @@ const styles = () =>
 					mqpacker({
 						sort: sortCSSmq,
 					}),
-					isProduction ? autoprefixer() : false,
+					isProduction() ? autoprefixer() : false,
 				].filter(Boolean),
 			),
 		)
 		.pipe(
 			gulpif(
-				isProduction,
+				isProduction(),
 				mincss({
 					compatibility: "ie8",
 					level: {
@@ -61,14 +61,14 @@ const styles = () =>
 		)
 		.pipe(
 			gulpif(
-				isProduction,
+				isProduction(),
 				rename({
 					suffix: ".min",
 				}),
 			),
 		)
 		.pipe(plumber.stop())
-		.pipe(gulpif(!isProduction, sourcemaps.write("./maps/")))
+		.pipe(gulpif(!isProduction(), sourcemaps.write("./maps/")))
 		.pipe(gulp.dest(config.tasks.styles.dist))
 		.pipe(
 			debug({
@@ -77,4 +77,4 @@ const styles = () =>
 		)
 		.pipe(browsersync.stream());
 
-export { styles };
+module.exports.styles = styles;
