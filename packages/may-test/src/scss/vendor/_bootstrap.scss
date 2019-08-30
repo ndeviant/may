@@ -1,0 +1,53 @@
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins";
+
+// Rewrite bootstrap grid variables
+$grid-gutter-width: 30px;
+$grid-columns: 12;
+
+$grid-breakpoints: (
+	xxxs: 0,
+	xxs: 360px,
+	xs: 414px,
+	sm: 576px,
+	md: 768px,
+	lg: 992px,
+	xl: 1200px,
+	xxl: 1600px
+);
+
+$container-max-widths: map-merge(
+	$container-max-widths,
+	(
+		xxl: 1570px
+	)
+);
+
+// Rewrite bootstrap components variables
+
+// You can choose whether use bootstrap ore other reset
+@import "bootstrap/scss/bootstrap-reboot";
+
+// Full bootstrap grid
+// @import "bootstrap/scss/bootstrap-grid";
+
+// Or if you want to use only containers from bootstrap:
+// Src: https://github.com/twbs/bootstrap/blob/master/scss/_grid.scss
+
+@if $enable-grid-classes {
+	.container {
+		@include make-container();
+		@include make-container-max-widths();
+	}
+}
+
+@if $enable-grid-classes {
+	.container-fluid {
+		@include make-container();
+	}
+}
+
+// Below you can import other bootstrap components which you need.
+// Or you can just erase everything below `@import "bootstrap-reboot"`
+// and import full bootstrap package if you want.

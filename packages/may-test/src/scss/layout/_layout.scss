@@ -1,0 +1,12 @@
+.layout {
+	overflow: hidden;
+	max-width: 100vw;
+	min-height: 100vh;
+	// height: 100%; // needed for ie11
+	display: flex;
+	flex-direction: column;
+
+	&__main {
+		flex-grow: 1;
+	}
+}

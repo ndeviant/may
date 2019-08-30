@@ -1,0 +1,24 @@
+/**
+ * Styles for content which coming from cms
+ */
+
+.cms-content {
+	padding-top: 1px;
+	padding-bottom: 1px;
+
+	a {
+		color: $body-color;
+		transition: color 0.15s, box-shadow 0.15s;
+		box-shadow: inset 0 -2px 0 rgba($primary, 0.7);
+
+		&:visited {
+			color: darken($body-color, 20%);
+		}
+
+		&:hover {
+			color: $primary;
+			text-decoration: none;
+			box-shadow: inset 0 -2px 0 $primary;
+		}
+	}
+}

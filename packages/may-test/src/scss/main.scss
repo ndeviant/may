@@ -1,0 +1,32 @@
+/**
+ * SCSS structure official SASS guidelines with additional sections folder
+ * https://sass-guidelin.es/#the-7-1-pattern
+ */
+
+// Utils
+@import "utils/variables";
+@import "utils/mixins";
+
+// Vendor
+@import "vendor/bootstrap";
+
+// Base
+@import "base/fonts";
+@import "base/base";
+@import "base/cms";
+
+// Layout
+@import "layout/layout";
+@import "layout/header";
+@import "layout/footer";
+
+// Components
+@import "components/common";
+@import "components/btn";
+@import "components/welcome";
+
+// Sections
+@import "sections/demo-section";
+
+// Pages
+// @import "pages/*";
