@@ -16,10 +16,12 @@
   ],
   "peerDependencies": {
     "prettier": "1.x",
-    "prettier-stylelint": "0.x",
-    "stylelint": "10.x",
-    "stylelint-config-prettier": "5.x",
-    "stylelint-config-recommended-scss": "3.x",
-    "stylelint-scss": "3.x"
+    "stylelint": "10.x"
+  },
+  "dependencies": {
+    "prettier-stylelint": "^0.4.2",
+    "stylelint-config-prettier": "^5.2.0",
+    "stylelint-config-recommended-scss": "^3.3.0",
+    "stylelint-scss": "^3.9.3"
   }
 }

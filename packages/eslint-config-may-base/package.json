@@ -15,15 +15,15 @@
     "index.js"
   ],
   "peerDependencies": {
-    "babel-eslint": "10.x",
     "eslint": "6.x",
-    "eslint-plugin-import": "2.x",
-    "eslint-config-airbnb-base": "13.x",
-    "eslint-config-prettier": "6.x",
-    "eslint-plugin-prettier": "3.x",
     "prettier": "1.x"
   },
   "dependencies": {
+    "babel-eslint": "^10.0.2",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.0",
     "confusing-browser-globals": "^1.0.8"
   }
 }
