@@ -1,16 +1,22 @@
+const path = require("path");
 
-const gulp = require("gulp"); 
-const replace = require("gulp-replace"); 
-const twig = require("gulp-twig"); 
-const gulpif = require("gulp-if"); 
-const browsersync = require("browser-sync"); 
+const gulp = require("gulp");
+const replace = require("gulp-replace");
+const twig = require("gulp-twig");
+const gulpif = require("gulp-if");
+const browsersync = require("browser-sync");
 
-const { plumbed } = require("./helpers/plumbed"); 
-const { config } = require("./helpers/gulp.config"); 
-const { isProduction } = require("./helpers/isProduction"); 
-const { filters } = require("./helpers/octoberFilters"); 
+const { plumbed } = require("./helpers/plumbed");
+const { config } = require("./helpers/gulp.config");
+const { isProduction } = require("./helpers/isProduction");
+const { filters } = require("./helpers/octoberFilters");
+const { moduleExists } = require("./helpers/moduleExists");
 
-const data = require("../template.data");
+const cwd = process.cwd();
+const configPath = path.resolve(cwd, "template.data.js");
+
+// eslint-disable-next-line
+const data = moduleExists(configPath) && require(configPath);
 
 const views = () =>
 	gulp

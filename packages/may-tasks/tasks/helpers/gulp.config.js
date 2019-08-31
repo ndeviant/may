@@ -1,6 +1,15 @@
-const { resolveFunction } = require("./resolveFunction");
+const path = require("path");
 
-const userOptions = require("../../may.config");
+const { resolveFunction } = require("./resolveFunction");
+const { moduleExists } = require("./moduleExists");
+
+const cwd = process.cwd();
+const configPath = path.resolve(cwd, "may.config.js");
+
+const userOptions = moduleExists(configPath)
+	? // eslint-disable-next-line import/no-dynamic-require
+	  require(configPath)
+	: { root: {}, browserSync: {}, tasks: {} };
 
 /**
  * Root paths:

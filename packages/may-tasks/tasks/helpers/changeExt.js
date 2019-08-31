@@ -1,10 +1,10 @@
-const gulp = require("gulp"); 
-const clean = require("gulp-clean"); 
-const rename = require("gulp-rename"); 
+const gulp = require("gulp");
+const clean = require("gulp-clean");
+const rename = require("gulp-rename");
 const { argv } = require("yargs");
 
-const { plumbed } = require("./plumbed"); 
-const { config } = require("./gulp.config"); 
+const { plumbed } = require("./plumbed");
+const { config } = require("./gulp.config");
 
 const { from, to } = argv;
 
