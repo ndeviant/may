@@ -1,20 +1,20 @@
-const gulp = require("gulp"); 
-const debug = require("gulp-debug"); 
-const gulpif = require("gulp-if"); 
-const plumber = require("gulp-plumber"); 
-const sass = require("gulp-sass"); 
-const mqpacker = require("css-mqpacker"); 
-const sortCSSmq = require("sort-css-media-queries"); 
-const mincss = require("gulp-clean-css"); 
-const autoprefixer = require("autoprefixer"); 
-const browsersync = require("browser-sync"); 
-const postcss = require("gulp-postcss"); 
-const sourcemaps = require("gulp-sourcemaps"); 
-const rename = require("gulp-rename"); 
+const gulp = require("gulp");
+const debug = require("gulp-debug");
+const gulpif = require("gulp-if");
+const plumber = require("gulp-plumber");
+const sass = require("gulp-sass");
+const mqpacker = require("css-mqpacker");
+const sortCSSmq = require("sort-css-media-queries");
+const mincss = require("gulp-clean-css");
+const autoprefixer = require("autoprefixer");
+const browsersync = require("browser-sync");
+const postcss = require("gulp-postcss");
+const sourcemaps = require("gulp-sourcemaps");
+const rename = require("gulp-rename");
 
-const { plumbed } = require("./helpers/plumbed"); 
-const { config } = require("./helpers/gulp.config"); 
-const { isProduction } = require("./helpers/isProduction"); 
+const { plumbed } = require("./helpers/plumbed");
+const { config } = require("./helpers/gulp.config");
+const { isProduction } = require("./helpers/isProduction");
 
 const styles = () =>
 	gulp
@@ -23,7 +23,8 @@ const styles = () =>
 		.pipe(plumbed("Styles"))
 		.pipe(
 			sass({
-				includePaths: ["./node_modules"],
+				// `../../node_modules` is hack for lerna monorepos
+				includePaths: ["./node_modules", "../../node_modules"],
 			}),
 		)
 		.pipe(
