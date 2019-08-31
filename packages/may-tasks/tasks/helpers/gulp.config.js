@@ -7,8 +7,7 @@ const cwd = process.cwd();
 const configPath = path.resolve(cwd, "may.config.js");
 
 const userOptions = moduleExists(configPath)
-	? // eslint-disable-next-line import/no-dynamic-require
-	  require(configPath)
+	? require(configPath) // eslint-disable-line import/no-dynamic-require
 	: { root: {}, browserSync: {}, tasks: {} };
 
 /**
@@ -110,9 +109,9 @@ scripts = {
 
 let images = {
 	src: [
-		`${root.src}/images/**/*.{jpg,jpeg,png,gif,svg}`,
+		`${root.src}/images/**/*.{jpg,jpeg,png,gif,svg,ico}`,
 		`!${root.src}/images/svg/**/*.svg`,
-		`!${root.src}/images/favicon.{jpg,jpeg,png,gif,svg}`,
+		`!${root.src}/images/favicon.{jpg,jpeg,png,gif,svg,ico}`,
 	],
 	dist: `${root.dist}/assets/images/`,
 	run: true,

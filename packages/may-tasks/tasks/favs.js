@@ -1,8 +1,8 @@
-const gulp = require("gulp"); 
-const debug = require("gulp-debug"); 
-const favicons = require("gulp-favicons"); 
+const gulp = require("gulp");
+const debug = require("gulp-debug");
+const favicons = require("gulp-favicons");
 
-const { config } = require("./helpers/gulp.config"); 
+const { config } = require("./helpers/gulp.config");
 
 const favs = () =>
 	gulp
