@@ -1,20 +1,20 @@
 {
   "name": "may-tasks",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Configuration and tasks for May.",
   "author": "Nikolai Kolosovskyi",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/ndeviant/may.git",
-		"directory": "packages/may-tasks"
-	},
-	"license": "MIT",
-	"engines": {
-		"node": ">=8.10"
-	},
-	"bugs": {
-		"url": "https://github.com/ndeviant/may/issues"
-	},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ndeviant/may.git",
+    "directory": "packages/may-tasks"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=8.10"
+  },
+  "bugs": {
+    "url": "https://github.com/ndeviant/may/issues"
+  },
   "bin": {
     "may-tasks": "./bin/index.js"
   },
@@ -32,10 +32,12 @@
     "autoprefixer": "^9.6.1",
     "babel-loader": "^8.0.6",
     "browser-sync": "^2.26.7",
+    "chalk": "^2.4.2",
     "cross-spawn": "^6.0.5",
     "css-mqpacker": "^7.0.0",
     "eslint": "^6.1.0",
     "eslint-config-may-base": "^0.0.1",
+    "fs-extra": "^8.1.0",
     "gulp": "^4.0.2",
     "gulp-changed": "^4.0.0",
     "gulp-clean": "^0.4.0",
