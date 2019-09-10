@@ -320,7 +320,7 @@ function run(
 	usePnp,
 ) {
 	getInstallPackage(version, originalDirectory).then(packageToInstall => {
-		const allDependencies = [packageToInstall];
+		const allDependencies = ["bootstrap", "svgxuse", packageToInstall];
 
 		console.log("Installing packages. This might take a couple of minutes.");
 		getPackageName(packageToInstall)
