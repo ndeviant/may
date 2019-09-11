@@ -3,22 +3,13 @@
 const spawn = require("cross-spawn");
 const path = require("path");
 
-const gulpfile = path.resolve(__dirname, '../', 'gulpfile.js');
+const gulpfile = path.resolve(__dirname, "../root/", "gulpfile.js");
 const cwd = process.cwd();
 
-console.log(cwd, path.resolve(cwd, 'may.config.js'));
-
+console.log(cwd, path.resolve(cwd, "may.config.js"));
 
 const args = process.argv.slice(2);
 
-spawn.sync(
-	"gulp",
-	[
-		"--gulpfile",
-		gulpfile,
-		"--cwd",
-		cwd,
-		...args,
-	],
-	{ stdio: "inherit" },
-);
+spawn.sync("gulp", ["--gulpfile", gulpfile, "--cwd", cwd, ...args], {
+	stdio: "inherit",
+});
