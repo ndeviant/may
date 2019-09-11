@@ -13,11 +13,8 @@
 		"build": "may-tasks build",
 		"tasks": "may-tasks --tasks"
 	},
-	"devDependencies": {
-		"may-tasks": "^0.0.1"
-	},
 	"dependencies": {
-		"@babel/runtime": "^7.5.5",
+		"may-tasks": "^0.0.5",
 		"bootstrap": "^4.3.1",
 		"svgxuse": "^1.2.6"
 	},
