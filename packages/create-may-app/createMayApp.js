@@ -628,28 +628,6 @@ function checkAppName(appName) {
 	}
 }
 
-function makeCaretRange(dependencies, name) {
-	const version = dependencies[name];
-
-	if (typeof version === "undefined") {
-		console.error(chalk.red(`Missing ${name} dependency in package.json`));
-		process.exit(1);
-	}
-
-	let patchedVersion = `^${version}`;
-
-	if (!semver.validRange(patchedVersion)) {
-		console.error(
-			`Unable to patch ${name} dependency version because version ${chalk.red(
-				version,
-			)} will become invalid ${chalk.red(patchedVersion)}`,
-		);
-		patchedVersion = version;
-	}
-
-	dependencies[name] = patchedVersion;
-}
-
 function setCaretRangeForRuntimeDeps(packageName) {
 	const packagePath = path.join(process.cwd(), "package.json");
 	const packageJson = require(packagePath);
@@ -710,9 +688,9 @@ function isSafeToCreateProjectIn(root, name) {
 			`The directory ${chalk.green(name)} contains files that could conflict:`,
 		);
 		console.log();
-		for (const file of conflicts) {
+		conflicts.forEach(file => {
 			console.log(`  ${file}`);
-		}
+		});
 		console.log();
 		console.log(
 			"Either try using a new directory name, or remove the files listed above.",
@@ -744,7 +722,9 @@ function getProxy() {
 			.toString()
 			.trim();
 		return httpsProxy !== "null" ? httpsProxy : undefined;
-	} catch (e) {}
+	} catch (e) {
+		return undefined;
+	}
 }
 function checkThatNpmCanReadCwd() {
 	const cwd = process.cwd();
@@ -817,8 +797,8 @@ function checkIfOnline(useYarn) {
 
 	return new Promise(resolve => {
 		dns.lookup("registry.yarnpkg.com", err => {
-			let proxy;
-			if (err != null && (proxy = getProxy())) {
+			const proxy = getProxy();
+			if (err != null && proxy) {
 				// If a proxy is defined, we likely can't resolve external hostnames.
 				// Try to resolve the proxy name as an indication of a connection.
 				dns.lookup(url.parse(proxy).hostname, proxyErr => {
