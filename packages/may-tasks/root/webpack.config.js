@@ -1,3 +1,5 @@
+const webpack = require("webpack");
+
 const { isProduction } = require("./tasks/helpers/isProduction");
 
 const webpackConfig = {
@@ -12,8 +14,21 @@ const webpackConfig = {
 				exclude: /node_modules/,
 				use: {
 					loader: "babel-loader",
-					query: {
-						presets: [["@babel/preset-env", { modules: false }]],
+					options: {
+						presets: [
+							[require.resolve("@babel/preset-env"), { modules: false }],
+						],
+						plugins: [
+							"@babel/plugin-syntax-dynamic-import",
+							"@babel/plugin-proposal-class-properties",
+							"@babel/plugin-transform-runtime",
+						].map(require.resolve),
+
+						cacheDirectory: true,
+						cacheCompression: false,
+						compact: isProduction(),
+						babelrc: false,
+						configFile: false,
 					},
 				},
 			},
@@ -34,7 +49,13 @@ const webpackConfig = {
 		},
 	},
 
-	plugins: [],
+	plugins: [
+		!isProduction() &&
+			new webpack.SourceMapDevToolPlugin({
+				filename: "maps/[name].js.map",
+				lineToLine: true,
+			}),
+	].filter(Boolean),
 };
 
 webpackConfig.mode = isProduction() ? "production" : "development";
