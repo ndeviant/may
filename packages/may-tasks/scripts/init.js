@@ -10,8 +10,20 @@ process.on("unhandledRejection", err => {
 const fs = require("fs-extra");
 const path = require("path");
 const chalk = require("chalk");
+const spawn = require("cross-spawn");
 const { execSync } = require("child_process");
 const os = require("os");
+
+const dependencies = ["bootstrap", "svgxuse"];
+
+const defaultBrowsers = {
+	production: [">0.2%", "not dead", "not op_mini all"],
+	development: [
+		"last 1 chrome version",
+		"last 1 firefox version",
+		"last 1 safari version",
+	],
+};
 
 function isInGitRepository() {
 	try {
@@ -65,7 +77,7 @@ function tryGitInit(appPath) {
 	}
 }
 
-module.exports = function(
+module.exports = function init(
 	appPath,
 	appName,
 	verbose,
@@ -87,6 +99,9 @@ module.exports = function(
 		build: "may-tasks build",
 		tasks: "may-tasks --tasks",
 	};
+
+	// Setup the browsers list
+	appPackage.browserslist = defaultBrowsers;
 
 	fs.writeFileSync(
 		path.join(appPath, "package.json"),
@@ -143,7 +158,7 @@ module.exports = function(
 		command = "npm";
 		args = ["install", "--save", verbose && "--verbose"].filter(e => e);
 	}
-	args.push("bootstrap", "svgxuse");
+	args.push(...dependencies);
 
 	// Install additional template dependencies, if present
 	const templateDependenciesPath = path.join(
@@ -158,6 +173,17 @@ module.exports = function(
 			}),
 		);
 		fs.unlinkSync(templateDependenciesPath);
+	}
+
+	if (!isDependenciesInstalled(appPackage) || template) {
+		console.log(`Installing additional dependencies using ${command}...`);
+		console.log();
+
+		const proc = spawn.sync(command, args, { stdio: "inherit" });
+		if (proc.status !== 0) {
+			console.error(`\`${command} ${args.join(" ")}\` failed`);
+			return;
+		}
 	}
 
 	if (tryGitInit(appPath)) {
@@ -218,3 +244,9 @@ module.exports = function(
 	console.log();
 	console.log("Happy hacking!");
 };
+
+function isDependenciesInstalled(appPackage) {
+	const deps = appPackage.dependencies || {};
+
+	return !dependencies.some(dep => typeof deps[dep] === "undefined");
+}
