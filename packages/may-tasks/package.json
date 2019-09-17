@@ -63,7 +63,7 @@
 		"imagemin-zopfli": "^6.0.0",
 		"prettier": "^1.18.2",
 		"sort-css-media-queries": "^1.4.3",
-		"stylelint": "^10.1.0",
+		"stylelint": "^11.0.0",
 		"stylelint-config-may-scss": "^0.0.1",
 		"uglifyjs-webpack-plugin": "^2.2.0",
 		"webpack": "^4.39.1",

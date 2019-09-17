@@ -20,20 +20,20 @@ const { bsyncConfig, tasks } = config;
 
 const webpackCompiler = webpack(webpackConfig);
 
+if (!isProduction) {
+	if (!bsyncConfig.middleware) bsyncConfig.middleware = [];
+
+	bsyncConfig.middleware.push(
+		webpackDevMiddleware(webpackCompiler, {
+			publicPath: webpackConfig.output.publicPath,
+			stats: webpackConfig.stats,
+			noInfo: true,
+		}),
+		webpackHotMiddleware(webpackCompiler),
+	);
+}
+
 const server = () => {
-	if (!isProduction) {
-		if (!bsyncConfig.middleware) bsyncConfig.middleware = [];
-
-		bsyncConfig.middleware.push(
-			webpackDevMiddleware(webpackCompiler, {
-				publicPath: webpackConfig.output.publicPath,
-				stats: webpackConfig.stats,
-				noInfo: true,
-			}),
-			webpackHotMiddleware(webpackCompiler),
-		);
-	}
-
 	browsersync.init(bsyncConfig);
 
 	if (tasks.views.run) {

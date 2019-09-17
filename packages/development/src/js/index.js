@@ -1,11 +1,14 @@
 import "./vendor";
 
-const pepe = "pepe";
-
 class ClassProp {
-	static hello = () => {
-		console.log(pepe);
+	static hello = async () => {
+		fetch("https://rickandmortyapi.com/api/character")
+			.then(res => res.json())
+			.then(data => {
+				console.log(data);
+			});
 	};
 }
 
 ClassProp.hello();
+console.log("data");
