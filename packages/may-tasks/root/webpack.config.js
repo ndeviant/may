@@ -1,10 +1,31 @@
-const webpack = require("webpack");
+const path = require("path");
 
+const webpack = require("webpack");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+
+const { config } = require("./tasks/helpers/gulp.config");
 const { isProduction } = require("./tasks/helpers/isProduction");
 
+const cwd = process.cwd();
+
+const publicPath =
+	config.bsyncConfig.proxy && config.bsyncConfig.proxy.target
+		? config.bsyncConfig.proxy.target
+		: "/";
+
 const webpackConfig = {
+	entry: {
+		main: [
+			!isProduction && "webpack/hot/dev-server",
+			!isProduction && "webpack-hot-middleware/client",
+			path.join(cwd, config.tasks.scripts.src),
+		].filter(Boolean),
+	},
+
 	output: {
 		filename: "[name].js",
+		path: path.join(cwd, config.tasks.scripts.dist),
+		publicPath,
 	},
 
 	module: {
@@ -12,25 +33,28 @@ const webpackConfig = {
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
-				use: {
-					loader: "babel-loader",
-					options: {
-						presets: [
-							[require.resolve("@babel/preset-env"), { modules: false }],
-						],
-						plugins: [
-							"@babel/plugin-syntax-dynamic-import",
-							"@babel/plugin-proposal-class-properties",
-							"@babel/plugin-transform-runtime",
-						].map(require.resolve),
+				use: [
+					{
+						loader: "babel-loader",
+						options: {
+							presets: [
+								[require.resolve("@babel/preset-env"), { modules: false }],
+							],
+							plugins: [
+								"@babel/plugin-syntax-dynamic-import",
+								"@babel/plugin-proposal-class-properties",
+								"@babel/plugin-transform-runtime",
+							].map(require.resolve),
 
-						cacheDirectory: true,
-						cacheCompression: false,
-						compact: isProduction(),
-						babelrc: false,
-						configFile: false,
+							cacheDirectory: true,
+							cacheCompression: false,
+							compact: isProduction,
+							babelrc: false,
+							configFile: false,
+						},
 					},
-				},
+					"webpack-module-hot-accept",
+				],
 			},
 		],
 	},
@@ -47,18 +71,30 @@ const webpackConfig = {
 				},
 			},
 		},
+
+		minimizer: [isProduction && new UglifyJsPlugin()].filter(Boolean),
 	},
 
 	plugins: [
-		!isProduction() &&
+		new webpack.NoEmitOnErrorsPlugin(),
+
+		!isProduction &&
 			new webpack.SourceMapDevToolPlugin({
 				filename: "maps/[name].js.map",
 				lineToLine: true,
 			}),
+		!isProduction && new webpack.HotModuleReplacementPlugin(),
 	].filter(Boolean),
-};
 
-webpackConfig.mode = isProduction() ? "production" : "development";
-webpackConfig.devtool = isProduction() ? false : "cheap-eval-source-map";
+	mode: isProduction ? "production" : "development",
+	devtool: isProduction ? false : "cheap-eval-source-map",
+
+	stats: {
+		env: true,
+		hash: false,
+		modules: false,
+		colors: true,
+	},
+};
 
 module.exports = webpackConfig;

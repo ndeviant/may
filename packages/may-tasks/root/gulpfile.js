@@ -1,6 +1,3 @@
-// Helper tasks
-module.exports.changeExt = require("./tasks/helpers/changeExt").changeExt;
-
 // Build tasks
 module.exports.cleanFiles = require("./tasks/cleanFiles").cleanFiles;
 module.exports.favs = require("./tasks/favs").favs;

@@ -8,4 +8,4 @@ class ClassProp {
 	};
 }
 
-console.log(ClassProp.hello());
+ClassProp.hello();

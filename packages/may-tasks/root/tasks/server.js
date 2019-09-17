@@ -1,9 +1,11 @@
 const gulp = require("gulp");
 const browsersync = require("browser-sync");
+const webpack = require("webpack");
+const webpackDevMiddleware = require("webpack-dev-middleware");
+const webpackHotMiddleware = require("webpack-hot-middleware");
 
 const { favs } = require("./favs");
 const { images } = require("./images");
-const { scripts } = require("./scripts");
 const { styles } = require("./styles");
 const { svg } = require("./svg");
 const { views } = require("./views");
@@ -11,10 +13,27 @@ const { webp } = require("./webp");
 const { assets } = require("./assets");
 
 const { config } = require("./helpers/gulp.config");
+const { isProduction } = require("./helpers/isProduction");
+const webpackConfig = require("../webpack.config");
 
 const { bsyncConfig, tasks } = config;
 
+const webpackCompiler = webpack(webpackConfig);
+
 const server = () => {
+	if (!isProduction) {
+		if (!bsyncConfig.middleware) bsyncConfig.middleware = [];
+
+		bsyncConfig.middleware.push(
+			webpackDevMiddleware(webpackCompiler, {
+				publicPath: webpackConfig.output.publicPath,
+				stats: webpackConfig.stats,
+				noInfo: true,
+			}),
+			webpackHotMiddleware(webpackCompiler),
+		);
+	}
+
 	browsersync.init(bsyncConfig);
 
 	if (tasks.views.run) {
@@ -23,10 +42,6 @@ const server = () => {
 
 	if (tasks.styles.run) {
 		gulp.watch(tasks.styles.watch, styles);
-	}
-
-	if (tasks.scripts.run) {
-		gulp.watch(tasks.scripts.watch, scripts);
 	}
 
 	if (tasks.images.run) {

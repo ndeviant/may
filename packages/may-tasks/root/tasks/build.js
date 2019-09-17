@@ -11,13 +11,11 @@ const { webp } = require("./webp");
 const { assets } = require("./assets");
 const { htaccess } = require("./htaccess");
 
-const { setNodeEnv } = require("./helpers/setNodeEnv");
 const { config } = require("./helpers/gulp.config");
 
 const { tasks } = config;
 
 const activeTasks = [
-	setNodeEnv("production"),
 	tasks.cleanFiles.run ? cleanFiles : false,
 	tasks.htaccess.run ? htaccess : false,
 	tasks.views.run ? views : false,

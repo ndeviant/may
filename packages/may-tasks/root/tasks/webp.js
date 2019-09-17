@@ -17,7 +17,7 @@ const webp = () =>
 		.pipe(
 			gulpwebp(
 				gulpif(
-					isProduction(),
+					isProduction,
 					imageminWebp({
 						lossless: true,
 						quality: 90,

@@ -19,7 +19,7 @@ const { isProduction } = require("./helpers/isProduction");
 const styles = () =>
 	gulp
 		.src(config.tasks.styles.src)
-		.pipe(gulpif(!isProduction(), sourcemaps.init()))
+		.pipe(gulpif(!isProduction, sourcemaps.init()))
 		.pipe(plumbed("Styles"))
 		.pipe(
 			sass({
@@ -33,13 +33,13 @@ const styles = () =>
 					mqpacker({
 						sort: sortCSSmq,
 					}),
-					isProduction() ? autoprefixer() : false,
+					isProduction ? autoprefixer() : false,
 				].filter(Boolean),
 			),
 		)
 		.pipe(
 			gulpif(
-				isProduction(),
+				isProduction,
 				mincss({
 					compatibility: "ie8",
 					level: {
@@ -60,16 +60,8 @@ const styles = () =>
 				}),
 			),
 		)
-		.pipe(
-			gulpif(
-				isProduction(),
-				rename({
-					suffix: ".min",
-				}),
-			),
-		)
 		.pipe(plumber.stop())
-		.pipe(gulpif(!isProduction(), sourcemaps.write("./maps/")))
+		.pipe(gulpif(!isProduction, sourcemaps.write("./maps/")))
 		.pipe(gulp.dest(config.tasks.styles.dist))
 		.pipe(
 			debug({

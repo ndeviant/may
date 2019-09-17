@@ -20,7 +20,7 @@ const images = () =>
 		.pipe(changed(config.tasks.images.dist))
 		.pipe(
 			gulpif(
-				isProduction(),
+				isProduction,
 				imagemin([
 					imageminGiflossy({
 						optimizationLevel: 3,

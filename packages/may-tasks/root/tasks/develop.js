@@ -11,7 +11,6 @@ const { webp } = require("./webp");
 const { assets } = require("./assets");
 const { server } = require("./server");
 
-const { setNodeEnv } = require("./helpers/setNodeEnv");
 const { config } = require("./helpers/gulp.config");
 
 const { tasks } = config;
@@ -31,7 +30,6 @@ const additionalTasks = [
 ].filter(Boolean);
 
 const develop = gulp.series(
-	setNodeEnv(),
 	cleanFiles,
 	gulp.parallel(...activeTasks),
 	gulp.parallel(server, ...additionalTasks),
