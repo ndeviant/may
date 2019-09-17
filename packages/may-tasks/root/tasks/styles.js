@@ -10,7 +10,6 @@ const autoprefixer = require("autoprefixer");
 const browsersync = require("browser-sync");
 const postcss = require("gulp-postcss");
 const sourcemaps = require("gulp-sourcemaps");
-const rename = require("gulp-rename");
 
 const { plumbed } = require("./helpers/plumbed");
 const { config } = require("./helpers/gulp.config");

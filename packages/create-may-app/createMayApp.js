@@ -220,7 +220,7 @@ function createApp(name, verbose, version, useNpm, usePnp, template) {
 		}
 		if (yarnUsesDefaultRegistry) {
 			fs.copySync(
-				require.resolve("./yarn.lock.cached"),
+				require.resolve("./cached.yarn.lock"),
 				path.join(root, "yarn.lock"),
 			);
 		}
