@@ -28,6 +28,7 @@ if (!isProduction) {
 			publicPath: webpackConfig.output.publicPath,
 			stats: webpackConfig.stats,
 			noInfo: true,
+			writeToDisk: true,
 		}),
 		webpackHotMiddleware(webpackCompiler),
 	);

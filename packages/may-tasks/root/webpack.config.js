@@ -79,16 +79,10 @@ const webpackConfig = {
 		new webpack.NoEmitOnErrorsPlugin(),
 
 		!isProduction && new webpack.HotModuleReplacementPlugin(),
-
-		!isProduction &&
-			new webpack.SourceMapDevToolPlugin({
-				filename: "maps/[name].js.map",
-				exclude: ["vendor.js"],
-			}),
 	].filter(Boolean),
 
 	mode: isProduction ? "production" : "development",
-	devtool: false,
+	devtool: !isProduction ? "cheap-module-eval-source-map" : false,
 
 	stats: {
 		env: true,

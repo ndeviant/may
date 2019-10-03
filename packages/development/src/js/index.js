@@ -11,4 +11,5 @@ class ClassProp {
 }
 
 ClassProp.hello();
+
 console.log("data");
