@@ -15,7 +15,7 @@
 	},
 	"dependencies": {
 		"bootstrap": "^4.3.1",
-		"may-tasks": "^0.0.5",
+		"may-tasks": "^0.0.7",
 		"svgxuse": "^1.2.6"
 	},
 	"broswerlist": [
