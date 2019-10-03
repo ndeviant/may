@@ -1,13 +1,13 @@
 ![may-starter](https://i.imgur.com/hr5WwqN.png)
 
-![Version](https://img.shields.io/github/package-json/v/ndeviant/may-starter?style=for-the-badge)
-![Dependencies](https://img.shields.io/david/ndeviant/may-starter?style=for-the-badge)
-![Activity](https://img.shields.io/github/last-commit/ndeviant/may-starter?style=for-the-badge)
+![Version](https://img.shields.io/github/package-json/v/ndeviant/may?style=for-the-badge)
+![Dependencies](https://img.shields.io/david/ndeviant/may?style=for-the-badge)
+![Activity](https://img.shields.io/github/last-commit/ndeviant/may?style=for-the-badge)
 
-![License](https://img.shields.io/github/license/ndeviant/may-starter?style=for-the-badge)
-![Eslint](https://img.shields.io/github/package-json/dependency-version/ndeviant/may-starter/dev/eslint?style=for-the-badge)
-![Prettier](https://img.shields.io/github/package-json/dependency-version/ndeviant/may-starter/dev/prettier?color=%232DD&style=for-the-badge)
-![Stylelint](https://img.shields.io/github/package-json/dependency-version/ndeviant/may-starter/dev/stylelint?color=%23D2D&style=for-the-badge)
+![License](https://img.shields.io/github/license/ndeviant/may?style=for-the-badge)
+![Eslint](https://img.shields.io/github/package-json/dependency-version/ndeviant/may/dev/eslint?style=for-the-badge)
+![Prettier](https://img.shields.io/github/package-json/dependency-version/ndeviant/may/dev/prettier?color=%232DD&style=for-the-badge)
+![Stylelint](https://img.shields.io/github/package-json/dependency-version/ndeviant/may/dev/stylelint?color=%23D2D&style=for-the-badge)
 
 # May Starter
 
