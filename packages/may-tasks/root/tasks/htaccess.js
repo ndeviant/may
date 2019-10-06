@@ -1,14 +1,14 @@
-const gulp = require("gulp"); 
-const debug = require("gulp-debug"); 
+const gulp = require("gulp");
 
-const { config } = require("./helpers/gulp.config"); 
+const { plugins } = require("./helpers/plugins");
+const { config } = require("./helpers/gulp.config");
 
 const htaccess = () =>
 	gulp
 		.src(config.tasks.htaccess.src)
 		.pipe(gulp.dest(config.tasks.htaccess.dist))
 		.pipe(
-			debug({
+			plugins.debug({
 				title: "Server config",
 			}),
 		);

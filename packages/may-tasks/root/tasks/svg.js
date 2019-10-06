@@ -1,18 +1,15 @@
-const gulp = require("gulp"); 
-const plumber = require("gulp-plumber"); 
-const debug = require("gulp-debug"); 
-const svgSprite = require("gulp-svg-sprite"); 
-const browsersync = require("browser-sync"); 
+const gulp = require("gulp");
 
-const { plumbed } = require("./helpers/plumbed"); 
-const { config } = require("./helpers/gulp.config"); 
+const { plugins } = require("./helpers/plugins");
+const { plumbed } = require("./helpers/plumbed");
+const { config } = require("./helpers/gulp.config");
 
 const svg = () =>
 	gulp
 		.src(config.tasks.svg.src)
 		.pipe(plumbed("Svg"))
 		.pipe(
-			svgSprite({
+			plugins.svgSprite({
 				shape: {
 					id: {
 						generator: `svg-%s`,
@@ -34,13 +31,13 @@ const svg = () =>
 				},
 			}),
 		)
-		.pipe(plumber.stop())
+		.pipe(plugins.plumber.stop())
 		.pipe(gulp.dest(config.tasks.svg.dist))
 		.pipe(
-			debug({
+			plugins.debug({
 				title: "Svg sprite",
 			}),
 		)
-		.on("end", browsersync.reload);
+		.on("end", plugins.browserSync.reload);
 
 module.exports.svg = svg;

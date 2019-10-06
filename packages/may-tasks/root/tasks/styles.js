@@ -1,45 +1,35 @@
 const gulp = require("gulp");
-const debug = require("gulp-debug");
-const gulpif = require("gulp-if");
-const plumber = require("gulp-plumber");
-const sass = require("gulp-sass");
-const mqpacker = require("css-mqpacker");
-const sortCSSmq = require("sort-css-media-queries");
-const mincss = require("gulp-clean-css");
-const autoprefixer = require("autoprefixer");
-const browsersync = require("browser-sync");
-const postcss = require("gulp-postcss");
-const sourcemaps = require("gulp-sourcemaps");
 
+const { plugins } = require("./helpers/plugins");
 const { plumbed } = require("./helpers/plumbed");
 const { config } = require("./helpers/gulp.config");
-const { isProduction } = require("./helpers/isProduction");
+const { isProduction } = require("./helpers/utils");
 
 const styles = () =>
 	gulp
 		.src(config.tasks.styles.src)
-		.pipe(gulpif(!isProduction, sourcemaps.init()))
+		.pipe(plugins.if(!isProduction, plugins.sourcemaps.init()))
 		.pipe(plumbed("Styles"))
 		.pipe(
-			sass({
+			plugins.sass({
 				// `../../node_modules` is hack for lerna monorepos
 				includePaths: ["./node_modules", "../../node_modules"],
 			}),
 		)
 		.pipe(
-			postcss(
+			plugins.postcss(
 				[
-					mqpacker({
-						sort: sortCSSmq,
+					plugins.cssMqpacker({
+						sort: plugins.sortCssMediaQueries,
 					}),
-					isProduction ? autoprefixer() : false,
+					isProduction ? plugins.autoprefixer() : false,
 				].filter(Boolean),
 			),
 		)
 		.pipe(
-			gulpif(
+			plugins.if(
 				isProduction,
-				mincss({
+				plugins.cleanCss({
 					compatibility: "ie8",
 					level: {
 						1: {
@@ -58,14 +48,14 @@ const styles = () =>
 				}),
 			),
 		)
-		.pipe(plumber.stop())
-		.pipe(gulpif(!isProduction, sourcemaps.write()))
+		.pipe(plugins.plumber.stop())
+		.pipe(plugins.if(!isProduction, plugins.sourcemaps.write()))
 		.pipe(gulp.dest(config.tasks.styles.dist))
 		.pipe(
-			debug({
+			plugins.debug({
 				title: "CSS files",
 			}),
 		)
-		.pipe(browsersync.stream());
+		.pipe(plugins.browserSync.stream());
 
 module.exports.styles = styles;

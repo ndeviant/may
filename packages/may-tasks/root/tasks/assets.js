@@ -1,16 +1,16 @@
-const gulp = require("gulp"); 
-const debug = require("gulp-debug"); 
-const changed = require("gulp-changed"); 
+const gulp = require("gulp");
 
-const { config } = require("./helpers/gulp.config"); 
+const { plugins } = require("./helpers/plugins");
+
+const { config } = require("./helpers/gulp.config");
 
 const assets = () =>
 	gulp
 		.src(config.tasks.assets.src)
-		.pipe(changed(config.tasks.assets.dist))
+		.pipe(plugins.changed(config.tasks.assets.dist))
 		.pipe(gulp.dest(config.tasks.assets.dist))
 		.pipe(
-			debug({
+			plugins.debug({
 				title: "Assets",
 			}),
 		);

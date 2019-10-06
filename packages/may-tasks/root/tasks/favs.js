@@ -1,14 +1,13 @@
 const gulp = require("gulp");
-const debug = require("gulp-debug");
-const favicons = require("gulp-favicons");
 
+const { plugins } = require("./helpers/plugins");
 const { config } = require("./helpers/gulp.config");
 
 const favs = () =>
 	gulp
 		.src(config.tasks.favs.src)
 		.pipe(
-			favicons({
+			plugins.favicons({
 				background: "transparent",
 				icons: {
 					appleIcon: true,
@@ -25,7 +24,7 @@ const favs = () =>
 		)
 		.pipe(gulp.dest(config.tasks.favs.dist))
 		.pipe(
-			debug({
+			plugins.debug({
 				title: "Favicons",
 			}),
 		);

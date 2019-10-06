@@ -4,7 +4,7 @@ const webpack = require("webpack");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 const { config } = require("./tasks/helpers/gulp.config");
-const { isProduction } = require("./tasks/helpers/isProduction");
+const { isProduction } = require("./tasks/helpers/utils");
 
 const cwd = process.cwd();
 

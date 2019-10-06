@@ -1,17 +1,16 @@
-const gulp  = require("gulp");
-const clean = require("gulp-clean"); 
-const debug = require("gulp-debug"); 
+const gulp = require("gulp");
 
-const { config } = require("./helpers/gulp.config"); 
+const { plugins } = require("./helpers/plugins");
+const { config } = require("./helpers/gulp.config");
 
 const cleanFiles = () =>
 	gulp
 		.src(config.tasks.cleanFiles.src, {
 			read: false,
 		})
-		.pipe(clean())
+		.pipe(plugins.clean())
 		.pipe(
-			debug({
+			plugins.debug({
 				title: "Cleaning...",
 			}),
 		);

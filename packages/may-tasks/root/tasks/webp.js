@@ -1,24 +1,20 @@
-const gulp = require("gulp"); 
-const debug = require("gulp-debug"); 
-const gulpif = require("gulp-if"); 
-const changed = require("gulp-changed"); 
-const gulpwebp = require("gulp-webp"); 
-const imageminWebp = require("imagemin-webp"); 
+const gulp = require("gulp");
 
-const { plumbed } = require("./helpers/plumbed"); 
-const { config } = require("./helpers/gulp.config"); 
-const { isProduction } = require("./helpers/isProduction"); 
+const { plugins } = require("./helpers/plugins");
+const { plumbed } = require("./helpers/plumbed");
+const { config } = require("./helpers/gulp.config");
+const { isProduction } = require("./helpers/utils");
 
 const webp = () =>
 	gulp
 		.src(config.tasks.webp.src)
 		.pipe(plumbed("WebP"))
-		.pipe(changed(config.tasks.webp.dist))
+		.pipe(plugins.changed(config.tasks.webp.dist))
 		.pipe(
-			gulpwebp(
-				gulpif(
+			plugins.webp(
+				plugins.if(
 					isProduction,
-					imageminWebp({
+					plugins.imageminWebp({
 						lossless: true,
 						quality: 90,
 						alphaQuality: 90,
@@ -28,7 +24,7 @@ const webp = () =>
 		)
 		.pipe(gulp.dest(config.tasks.webp.dist))
 		.pipe(
-			debug({
+			plugins.debug({
 				title: "WebP images",
 			}),
 		);

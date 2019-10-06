@@ -1,5 +1,4 @@
 const gulp = require("gulp");
-const browsersync = require("browser-sync");
 const webpack = require("webpack");
 const webpackDevMiddleware = require("webpack-dev-middleware");
 const webpackHotMiddleware = require("webpack-hot-middleware");
@@ -12,8 +11,9 @@ const { views } = require("./views");
 const { webp } = require("./webp");
 const { assets } = require("./assets");
 
+const { plugins } = require("./helpers/plugins");
 const { config } = require("./helpers/gulp.config");
-const { isProduction } = require("./helpers/isProduction");
+const { isProduction } = require("./helpers/utils");
 const webpackConfig = require("../webpack.config");
 
 const { bsyncConfig, tasks } = config;
@@ -35,7 +35,7 @@ if (!isProduction) {
 }
 
 const server = () => {
-	browsersync.init(bsyncConfig);
+	plugins.browserSync.init(bsyncConfig);
 
 	if (tasks.views.run) {
 		gulp.watch(tasks.views.watch, views);

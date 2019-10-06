@@ -1,8 +1,7 @@
 const path = require("path");
 const merge = require("lodash.merge");
 
-const { resolveFunction } = require("./resolveFunction");
-const { moduleExists } = require("./moduleExists");
+const { moduleExists, resolveFunction } = require("./utils");
 
 const cwd = process.cwd();
 const configPath = path.resolve(cwd, "may.config.js");
