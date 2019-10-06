@@ -1,8 +1,8 @@
 const path = require("path");
 
 const webpack = require("webpack");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
+const { plugins } = require("./tasks/helpers/plugins");
 const { config } = require("./tasks/helpers/gulp.config");
 const { isProduction } = require("./tasks/helpers/utils");
 
@@ -70,7 +70,9 @@ const webpackConfig = {
 			},
 		},
 
-		minimizer: [isProduction && new UglifyJsPlugin()].filter(Boolean),
+		minimizer: [isProduction && new plugins.UglifyJsWebpackPlugin()].filter(
+			Boolean,
+		),
 	},
 
 	plugins: [

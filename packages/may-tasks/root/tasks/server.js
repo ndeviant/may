@@ -18,19 +18,19 @@ const webpackConfig = require("../webpack.config");
 
 const { bsyncConfig, tasks } = config;
 
-const webpackCompiler = webpack(webpackConfig);
+if (!bsyncConfig.middleware) bsyncConfig.middleware = [];
 
 if (!isProduction) {
-	if (!bsyncConfig.middleware) bsyncConfig.middleware = [];
+	const webpackCompiler = webpack(webpackConfig);
 
 	bsyncConfig.middleware.push(
-		webpackDevMiddleware(webpackCompiler, {
+		plugins.webpackDevMiddleware(webpackCompiler, {
 			publicPath: webpackConfig.output.publicPath,
 			stats: webpackConfig.stats,
 			noInfo: true,
 			writeToDisk: true,
 		}),
-		webpackHotMiddleware(webpackCompiler),
+		plugins.webpackHotMiddleware(webpackCompiler),
 	);
 }
 
