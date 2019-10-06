@@ -43,7 +43,6 @@ const styles = () =>
 					compatibility: "ie8",
 					level: {
 						1: {
-							specialComments: 0,
 							removeEmpty: true,
 							removeWhitespace: true,
 						},
