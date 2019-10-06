@@ -1,6 +1,6 @@
 {
 	"name": "may-tasks",
-	"version": "0.0.7",
+	"version": "0.0.8",
 	"description": "Configuration and tasks for May.",
 	"author": "Nikolai Kolosovskyi",
 	"repository": {
@@ -61,6 +61,7 @@
 		"imagemin-pngquant": "^8.0.0",
 		"imagemin-webp": "^5.1.0",
 		"imagemin-zopfli": "^6.0.0",
+		"lodash.merge": "^4.6.2",
 		"prettier": "^1.18.2",
 		"sort-css-media-queries": "^1.4.3",
 		"stylelint": "^11.0.0",

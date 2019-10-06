@@ -9,8 +9,7 @@ const { config } = require("./helpers/gulp.config");
 const { filters } = require("./helpers/octoberFilters");
 const { moduleExists } = require("./helpers/moduleExists");
 
-const cwd = process.cwd();
-const configPath = path.resolve(cwd, "template.data.js");
+const configPath = path.resolve(config.tasks.views.src, "../../data.js");
 
 // eslint-disable-next-line
 const data = moduleExists(configPath) && require(configPath);

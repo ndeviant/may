@@ -60,7 +60,7 @@ const styles = () =>
 			),
 		)
 		.pipe(plumber.stop())
-		.pipe(gulpif(!isProduction, sourcemaps.write("./maps/")))
+		.pipe(gulpif(!isProduction, sourcemaps.write()))
 		.pipe(gulp.dest(config.tasks.styles.dist))
 		.pipe(
 			debug({

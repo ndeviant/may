@@ -1,4 +1,5 @@
 const path = require("path");
+const merge = require("lodash.merge");
 
 const { resolveFunction } = require("./resolveFunction");
 const { moduleExists } = require("./moduleExists");
@@ -6,9 +7,12 @@ const { moduleExists } = require("./moduleExists");
 const cwd = process.cwd();
 const configPath = path.resolve(cwd, "may.config.js");
 
-const userOptions = moduleExists(configPath)
-	? require(configPath) // eslint-disable-line import/no-dynamic-require
-	: { root: {}, browserSync: {}, tasks: {} };
+const userOptions = merge(
+	{ root: {}, browserSync: {}, tasks: {} },
+	moduleExists(configPath)
+		? require(configPath) // eslint-disable-line import/no-dynamic-require
+		: {},
+);
 
 /**
  * Root paths:
@@ -76,7 +80,7 @@ views = {
  */
 
 let styles = {
-	src: `${root.src}/scss/main.scss`,
+	src: `${root.src}/scss/*.scss`,
 	dist: `${root.assets}/css/`,
 	watch: `${root.src}/scss/**/*.scss`,
 	run: true,
@@ -101,27 +105,6 @@ let scripts = {
 scripts = {
 	...scripts,
 	...resolveFunction(userOptions.tasks.scripts, scripts),
-};
-
-/**
- * Images
- */
-
-let images = {
-	src: [
-		`${root.src}/images/**/*.{jpg,jpeg,png,gif,svg,ico}`,
-		`!${root.src}/images/svg/**/*.svg`,
-		`!${root.src}/images/favicon.{jpg,jpeg,png,gif,svg,ico}`,
-	],
-	dist: `${root.dist}/assets/images/`,
-	run: true,
-};
-
-images.watch = images.src;
-
-images = {
-	...images,
-	...resolveFunction(userOptions.tasks.images, images),
 };
 
 /**
@@ -173,6 +156,27 @@ svg.watch = svg.src;
 svg = {
 	...svg,
 	...resolveFunction(userOptions.tasks.svg, svg),
+};
+
+/**
+ * Images
+ */
+
+let images = {
+	src: [
+		`${root.src}/images/**/*.{jpg,jpeg,png,gif,svg,ico}`,
+		`!${svg.src}`,
+		`!${favs.src}`,
+	],
+	dist: `${root.dist}/assets/images/`,
+	run: true,
+};
+
+images.watch = images.src;
+
+images = {
+	...images,
+	...resolveFunction(userOptions.tasks.images, images),
 };
 
 /**
