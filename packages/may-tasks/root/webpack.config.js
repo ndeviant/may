@@ -14,13 +14,11 @@ const publicPath =
 		: "/";
 
 const webpackConfig = {
-	entry: {
-		main: [
-			!isProduction && "webpack/hot/dev-server",
-			!isProduction && "webpack-hot-middleware/client",
-			path.join(cwd, config.tasks.scripts.src),
-		].filter(Boolean),
-	},
+	entry: [
+		!isProduction && "webpack/hot/dev-server",
+		!isProduction && "webpack-hot-middleware/client",
+		path.join(cwd, config.tasks.scripts.src),
+	].filter(Boolean),
 
 	output: {
 		filename: "[name].js",

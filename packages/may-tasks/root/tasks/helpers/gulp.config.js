@@ -96,7 +96,7 @@ styles = {
  */
 
 let scripts = {
-	src: `${root.src}/js/index.js`,
+	src: `${root.src}/js/main.js`,
 	dist: `${root.assets}/js/`,
 	watch: `${root.src}/js/**/*.js`,
 	run: true,
@@ -180,6 +180,21 @@ images = {
 };
 
 /**
+ * Htaccess
+ */
+
+let htaccess = {
+	src: `${root.src}/.htaccess`,
+	dist: root.dist,
+	run: true,
+};
+
+htaccess = {
+	...htaccess,
+	...resolveFunction(userOptions.tasks.htaccess, htaccess),
+};
+
+/**
  * Other assets
  */
 
@@ -194,7 +209,7 @@ let assets = {
 		`!${root.src}/js/**/*`,
 		`!${root.src}/images`,
 		`!${root.src}/images/**/*`,
-		`!${root.src}/.htaccess`,
+		`!${htaccess.src}`,
 	],
 	dist: root.assets,
 	run: true,
@@ -205,21 +220,6 @@ assets.watch = assets.src;
 assets = {
 	...assets,
 	...resolveFunction(userOptions.tasks.assets, assets),
-};
-
-/**
- * Htaccess
- */
-
-let htaccess = {
-	src: `${root.src}/.htaccess`,
-	dist: root.dist,
-	run: true,
-};
-
-htaccess = {
-	...htaccess,
-	...resolveFunction(userOptions.tasks.htaccess, htaccess),
 };
 
 /**
