@@ -11,6 +11,8 @@
 
 # May Starter
 
+> Inspired by `create-react-app`.
+
 ## Features
 
 - build is designed to automate tasks in everyday front-end development
@@ -23,19 +25,21 @@
 
 ## Installation
 
-- install [Yarn](https://yarnpkg.com/en/docs/install)
+```sh
+npm install -g gulp-cli
+npx create-may-app my-app
+cd my-app
+npm start
+```
 
-> Yarn is a modern alternative to npm. Yarn works with the same `package.json` file and also downloads the necessary modules to the `node_modules` folder, but does it much faster.
+Get Started Immediately
+You don’t need to install or configure tools like Gulp, Webpack or Babel.
+They are preconfigured and hidden so that you can focus on the code.
 
-- download the build: `git clone https://github.com/ndeviant/may-starter.git`
-- install`gulp` globally: `yarn global add gulp-cli`
-- go to the downloaded folder with the build:`cd may-starter`
-- download the necessary dependencies: `yarn`
-- to get started, enter the command:`yarn start` (development mode)
-- to build a project, enter the command `yarn build` (build mode)
+Just create a project, and you’re good to go.
 
-If you did everything right , you should open a browser with a local server.
-The build mode implies project optimization: image compression, minification of CSS and JS files for uploading to the server.
+If you did everything right, browser with a local server should be opened.
+The build mode implies project optimization: image compression, autoprefixing of CSS, minification of CSS and JS files for uploading to the server.
 
 ## File structure
 
@@ -51,29 +55,22 @@ may-starter
 │   ├── js
 │   ├── scss
 │   ├── views
+│   │   └── data.js
 │   └── .htaccess
-├── gulpfile.babel.js
-├── gulp.options.js
-├── webpack.config.babel.js
+├── may.config.js
 ├── package.json
-├── template.data.js
-├── .babelrc.js
-├── .eslintrc.json
+├── .eslintrc.js
 ├── .gitignore
 ├── .prettierrc.js
 └── .stylelintrc.js
 ```
 
 - Root folder:
-  - `.babelrc.js` — es6 setup
   - `.eslintrc.js` — configure ESLint
-  - `.prettierrc.js` — configure ESLint
+  - `.prettierrc.js` — configure Prettier
   - `.stylelintrc.js` — configure Stylelint
   - `.gitignore` – a ban on tracking files Git
-  - `gulpfile.babel.js` — gulp problems
-  - `gulp.options.js` — Gulp settings
-  - `template.data.js` — Data for templates
-  - `webpack.config.js` — webpack `package settings.json` — list of dependencies
+  - `may.config.js` — Gulp tasks settings
 - Folder `src` - used during development:
   - fonts: `src/fonts`
   - images: `src/images`
@@ -83,9 +80,10 @@ may-starter
   - JS files: `src/js`
   - SCSS files: `src/styles`
   - Twig files: `src/views`
-  - site pages: `src/views/pages`
+  - Site pages: `src/views/pages`
+    - `src/views/data.js` — Data for templates
   - Apache web server configuration file with settings [gzip](https://habr.com/ru/post/221849/) (lossless compression): `src/.htaccess`
-- Folder `dist` folder from which you run a local server for development purposes (when you run `yarn run dev`)
+- Folder `dist` folder from which you run a local server for development purposes (when you run `npm run start`)
 
 ## Usage guidelines
 
@@ -103,7 +101,7 @@ may-starter
   - icons from `src/images/svg` folder are collected in one svg sprite at `src/images/sprite.svg`.
   - pictures that are not part of the design, and will later be loaded from the CMS put in the folder `src/media`. Ex: post images, product pictures.
 - all third-party libraries are installing in the `node_modules` folder
-  - to install another, use `yarn add [package_name]` command
+  - to install another, use `npm install [package_name]` command
   - to connect library JS files, import them into a BEM block JS file (that is, the BEM block that the script uses), for example:
     `javascript import $ from "jquery";` to connect library style files, import them into the `src/scss/vendor/[lib name].scss` (which in turn is imported into a file `src/styles/main.scss`)
 - only minified CSS and JS files are included in the layout.
