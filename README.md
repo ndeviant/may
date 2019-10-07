@@ -2,6 +2,7 @@
 
 ![Version](https://img.shields.io/github/package-json/v/ndeviant/may?style=for-the-badge)
 ![Activity](https://img.shields.io/github/last-commit/ndeviant/may?style=for-the-badge)
+![Dependencies](https://img.shields.io/david/ndeviant/may?path=packages%2Fmay-tasks&style=for-the-badge)
 
 ![License](https://img.shields.io/github/license/ndeviant/may?style=for-the-badge)
 ![Eslint](https://img.shields.io/github/package-json/dependency-version/ndeviant/may/dev/eslint?style=for-the-badge)
