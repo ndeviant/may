@@ -174,7 +174,7 @@ function createApp(name, verbose, version, useNpm, usePnp, template) {
 	if (!semver.satisfies(process.version, ">=8.10.0")) {
 		console.log(
 			chalk.yellow(
-				`You are using Node ${process.version} so the project will be bootstrapped with an old unsupported version of tools.\n\n` +
+				`You are using Node ${process.version}.\n\n` +
 					`Please update to Node 8.10 or higher for a better, fully supported experience.\n`,
 			),
 		);
