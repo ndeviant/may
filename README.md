@@ -1,7 +1,6 @@
 ![may-starter](https://i.imgur.com/hr5WwqN.png)
 
 ![Version](https://img.shields.io/github/package-json/v/ndeviant/may?style=for-the-badge)
-![Dependencies](https://img.shields.io/david/ndeviant/may?style=for-the-badge)
 ![Activity](https://img.shields.io/github/last-commit/ndeviant/may?style=for-the-badge)
 
 ![License](https://img.shields.io/github/license/ndeviant/may?style=for-the-badge)
@@ -11,12 +10,11 @@
 
 # May Starter
 
-> Inspired by `create-react-app`.
+> `create-react-app` without react.
 
 ## Features
 
 - build is designed to automate tasks in everyday front-end development
-- naming classes according to [BEM](https://ru.bem.info/)
 - using the template engine [twig](https://twig.symfony.com/)
 - using the preprocessor [SCSS](https://sass-lang.com/)
 - using the bootstrap grid [Bootstrap](https://getbootstrap.com/)
@@ -89,22 +87,21 @@ may-starter
 
 - stick to the original folder and file structure
 - stick component approach to the development of sites
-  - one BEM block contains one Twig file, one SCSS file and one JS file (if the block uses a script)
-  - SCSS-file of a block is imported to `src/styles/main.scss` file, JS-file is imported to `src/js/index.js`
+  - SCSS-file of a component is imported to `src/styles/main.scss` file, JS-file is imported to `src/js/main.js`
 - from all SCSS files, only `main.scss` is compiled. Other style files are imported into it
 - pages located in the folder `src/pages`
   - each page (including the main page) inherits the `src/views/layouts/default.htm` template
   - main page: `src/views/pages/index.htm`
 - fonts are in `src/fonts` folder, use `ttf`, `woff` and `woof2` formats
 - images are in the folder `src/images`
-  - the image for generating favicons should be in the `src/images/` folder and have a size of at least `100px x 100px`. Favicons will be generated to `src/images/favicons`, for better performance better to disable `favs` task, after you generated your favicons.
+  - the image for generating favicons should be `src/images/favicon.[your extension]`, and have a size of at least `100px x 100px`. Favicons will be generated to `src/images/favicons`, for better performance better to disable `favs` task, after you generated your favicons.
   - icons from `src/images/svg` folder are collected in one svg sprite at `src/images/sprite.svg`.
   - pictures that are not part of the design, and will later be loaded from the CMS put in the folder `src/media`. Ex: post images, product pictures.
 - all third-party libraries are installing in the `node_modules` folder
   - to install another, use `npm install [package_name]` command
-  - to connect library JS files, import them into a BEM block JS file (that is, the BEM block that the script uses), for example:
-    `javascript import $ from "jquery";` to connect library style files, import them into the `src/scss/vendor/[lib name].scss` (which in turn is imported into a file `src/styles/main.scss`)
-- only minified CSS and JS files are included in the layout.
+  - to connect library JS files, import them into JS file, for example: `javascript import $ from "jquery";`
+  - to connect library style files, import them into the `src/scss/vendor/[lib name].scss` (which in turn is imported into a file `src/styles/main.scss`)
+- only `main` CSS and JS files are included in the layout.
 
 ## Svg sprite
 
