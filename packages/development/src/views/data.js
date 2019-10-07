@@ -4,7 +4,7 @@
  */
 
 const data = {
-	title: "Twig starter",
+	title: "May starter",
 
 	posts: [
 		{
