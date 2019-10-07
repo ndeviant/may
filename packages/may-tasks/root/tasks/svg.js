@@ -29,6 +29,10 @@ const svg = () =>
 						sprite: "sprite.svg",
 					},
 				},
+				svg: {
+					namespaceIDs: false,
+					namespaceClassnames: false,
+				},
 			}),
 		)
 		.pipe(plugins.plumber.stop())
