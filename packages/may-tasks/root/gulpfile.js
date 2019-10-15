@@ -14,3 +14,5 @@ module.exports.assets = require("./tasks/assets").assets;
 module.exports.server = require("./tasks/server").server;
 module.exports.build = require("./tasks/build").build;
 module.exports.develop = require("./tasks/develop").develop;
+
+module.exports.start = module.exports.develop;

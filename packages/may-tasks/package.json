@@ -62,6 +62,7 @@
 		"imagemin-pngquant": "^8.0.0",
 		"imagemin-webp": "^5.1.0",
 		"imagemin-zopfli": "^6.0.0",
+		"inquirer": "^7.0.0",
 		"lodash.merge": "^4.6.2",
 		"prettier": "^1.18.2",
 		"sort-css-media-queries": "^1.4.3",

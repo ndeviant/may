@@ -8,12 +8,13 @@ const envs = {
 	test: TEST,
 };
 
-module.exports.setEnv = env => {
+const setEnv = env => {
 	process.env.BABEL_ENV = env;
 	process.env.NODE_ENV = env;
 };
 
+module.exports.setEnv = setEnv;
+
 module.exports.setEnvByTask = task => {
-	process.env.BABEL_ENV = envs[task];
-	process.env.NODE_ENV = envs[task];
+	setEnv(envs[task]);
 };

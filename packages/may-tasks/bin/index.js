@@ -4,11 +4,24 @@ const spawn = require("cross-spawn");
 const path = require("path");
 
 const { setEnvByTask } = require("../helpers/setEnv");
+const { runFileScript } = require("../helpers/runFileScript");
 
-const gulpfile = path.resolve(__dirname, "../root/", "gulpfile.js");
-const cwd = process.cwd();
+// Makes the script crash on unhandled rejections instead of silently
+// ignoring them. In the future, promise rejections that are not handled will
+// terminate the Node.js process with a non-zero exit code.
+process.on("unhandledRejection", err => {
+	throw err;
+});
 
 const args = process.argv.slice(2);
+
+// Run file script
+const isFileScript = runFileScript({ args });
+if (isFileScript) return;
+
+// Run gulp task
+const gulpfile = path.resolve(__dirname, "../root/", "gulpfile.js");
+const cwd = process.cwd();
 
 setEnvByTask(args[0]);
 
