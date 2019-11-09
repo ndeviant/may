@@ -8,7 +8,6 @@ const browserSync = {};
 
 const tasks = {
 	cleanFiles: {},
-	htaccess: {},
 	views: {},
 	styles: {},
 	scripts: {},
@@ -18,7 +17,6 @@ const tasks = {
 		run: false,
 	},
 	svg: {},
-	assets: {},
 };
 
 const options = {

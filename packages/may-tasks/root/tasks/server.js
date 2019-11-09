@@ -1,7 +1,5 @@
 const gulp = require("gulp");
 const webpack = require("webpack");
-const webpackDevMiddleware = require("webpack-dev-middleware");
-const webpackHotMiddleware = require("webpack-hot-middleware");
 
 const { favs } = require("./favs");
 const { images } = require("./images");
@@ -9,7 +7,7 @@ const { styles } = require("./styles");
 const { svg } = require("./svg");
 const { views } = require("./views");
 const { webp } = require("./webp");
-const { assets } = require("./assets");
+const { publicAssets } = require("./publicAssets");
 
 const { plugins } = require("./helpers/plugins");
 const { config } = require("./helpers/gulp.config");
@@ -37,6 +35,8 @@ if (!isProduction) {
 const server = () => {
 	plugins.browserSync.init(bsyncConfig);
 
+	gulp.watch(tasks.publicAssets.watch, publicAssets);
+
 	if (tasks.views.run) {
 		gulp.watch(tasks.views.watch, views);
 	}
@@ -59,10 +59,6 @@ const server = () => {
 
 	if (tasks.svg.run) {
 		gulp.watch(tasks.svg.watch, svg);
-	}
-
-	if (tasks.assets.run) {
-		gulp.watch(tasks.assets.watch, assets);
 	}
 };
 

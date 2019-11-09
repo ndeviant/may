@@ -19,6 +19,7 @@ const userOptions = merge(
  */
 const root = {
 	src: userOptions.root.src || "./src",
+	public: userOptions.root.public || "./public",
 	build: userOptions.root.build || "./build",
 	assets: "",
 };
@@ -45,11 +46,23 @@ const bsyncConfig = {
  */
 
 /**
+ * Public assets
+ */
+
+const publicAssets = {
+	src: `${root.public}/**/*`,
+	build: root.build,
+	run: true,
+};
+
+publicAssets.watch = publicAssets.src;
+
+/**
  *  Clean files
  */
 
 let cleanFiles = {
-	src: [`${root.build}/*.{html, htaccess}`, `${root.build}/assets/*`],
+	src: [`${root.build}/*.{html, htaccess}`, `${root.assets}/*`],
 	run: true,
 };
 
@@ -167,7 +180,7 @@ let images = {
 		`!${svg.src}`,
 		`!${favs.src}`,
 	],
-	build: `${root.build}/assets/images/`,
+	build: `${root.assets}/images/`,
 	run: true,
 };
 
@@ -179,53 +192,11 @@ images = {
 };
 
 /**
- * Htaccess
- */
-
-let htaccess = {
-	src: `${root.src}/.htaccess`,
-	build: root.build,
-	run: true,
-};
-
-htaccess = {
-	...htaccess,
-	...resolveFunction(userOptions.tasks.htaccess, htaccess),
-};
-
-/**
- * Other assets
- */
-
-let assets = {
-	src: [
-		`${root.src}/**/*`,
-		`!${root.src}/views`,
-		`!${root.src}/views/**/*`,
-		`!${root.src}/scss`,
-		`!${root.src}/scss/**/*`,
-		`!${root.src}/js`,
-		`!${root.src}/js/**/*`,
-		`!${root.src}/images`,
-		`!${root.src}/images/**/*`,
-		`!${htaccess.src}`,
-	],
-	build: root.assets,
-	run: true,
-};
-
-assets.watch = assets.src;
-
-assets = {
-	...assets,
-	...resolveFunction(userOptions.tasks.assets, assets),
-};
-
-/**
  * All tasks
  */
 
 const tasks = {
+	publicAssets,
 	cleanFiles,
 	views,
 	styles,
@@ -234,8 +205,6 @@ const tasks = {
 	webp,
 	favs,
 	svg,
-	assets,
-	htaccess,
 };
 
 /**
