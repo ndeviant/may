@@ -9,48 +9,22 @@ process.on("unhandledRejection", err => {
 
 const fs = require("fs-extra");
 const path = require("path");
+const getDirName = require("path").dirname;
 const { execSync } = require("child_process");
 const chalk = require("chalk");
 const inquirer = require("inquirer");
 const spawnSync = require("cross-spawn").sync;
 const os = require("os");
+const recursive = require("recursive-readdir");
 
 const { green } = chalk;
 const { cyan } = chalk;
 
-const paths = {
-	appPath: fs.realpathSync(process.cwd()),
-	ownPath: path.resolve(__dirname, "../."),
-};
+const appPath = fs.realpathSync(process.cwd());
+const ownPath = path.resolve(__dirname, "../.");
+const yarnLockFile = path.resolve(appPath, "./yarn.lock");
 
-paths.yarnLockFile = path.resolve(paths.appPath, "./yarn.lock");
-
-function getGitStatus() {
-	try {
-		const stdout = execSync(`git status --porcelain`, {
-			stdio: ["pipe", "pipe", "ignore"],
-		}).toString();
-		return stdout.trim();
-	} catch (e) {
-		return "";
-	}
-}
-
-function tryGitAdd(appPath) {
-	try {
-		spawnSync(
-			"git",
-			["add", path.join(appPath, "config"), path.join(appPath, ".")],
-			{
-				stdio: "inherit",
-			},
-		);
-
-		return true;
-	} catch (e) {
-		return false;
-	}
-}
+const folder = "root";
 
 inquirer
 	.prompt({
@@ -62,7 +36,7 @@ inquirer
 	.then(answer => {
 		if (!answer.shouldEject) {
 			console.log(cyan("Close one! Eject aborted."));
-			return;
+			process.exit(0);
 		}
 
 		const gitStatus = getGitStatus();
@@ -82,19 +56,15 @@ inquirer
 
 		console.log("Ejecting...");
 
-		const { ownPath, appPath } = paths;
+		return recursive(path.join(ownPath, folder));
+	})
+	.then(foundFiles => {
+		const files = foundFiles
+			// omit dirs from file list
+			.filter(file => fs.lstatSync(file).isFile());
 
-		const folder = "root";
-
-		function getNewFilePath(file) {
-			const filepath = file
-				.replace(ownPath, appPath)
-				.replace(new RegExp(`(\\\\|\\/|\\\\\\\\)${folder}`, "g"), "");
-
-			return filepath;
-		}
-
-		function verifyAbsent(file) {
+		// Ensure that the app folder is clean and we won't override any files
+		files.forEach(function verifyAbsent(file) {
 			const filepath = getNewFilePath(file);
 
 			if (fs.existsSync(filepath)) {
@@ -106,18 +76,7 @@ inquirer
 				);
 				process.exit(1);
 			}
-		}
-
-		// Make shallow array of files paths
-		const files = fs
-			.readdirSync(path.join(ownPath, folder))
-			// set full path
-			.map(file => path.join(ownPath, folder, file))
-			// omit dirs from file list
-			.filter(file => fs.lstatSync(file).isFile());
-
-		// Ensure that the app folder is clean and we won't override any files
-		files.forEach(verifyAbsent);
+		});
 
 		console.log();
 		console.log(cyan(`Copying files into ${appPath}`));
@@ -141,8 +100,13 @@ inquirer
 					"",
 				)
 				.trim()}\n`;
-			console.log(`  Adding ${cyan(file.replace(ownPath, ""))} to the project`);
-			fs.writeFileSync(getNewFilePath(file), content);
+			console.log(
+				`  Adding ${cyan(
+					getNewFilePath(file).replace(appPath, ""),
+				)} to the project`,
+			);
+
+			writeFileSync(getNewFilePath(file), content);
 		});
 		console.log();
 
@@ -221,7 +185,7 @@ inquirer
 			}
 		}
 
-		if (fs.existsSync(paths.yarnLockFile)) {
+		if (fs.existsSync(yarnLockFile)) {
 			const windowsCmdFilePath = path.join(
 				appPath,
 				"node_modules",
@@ -265,3 +229,44 @@ inquirer
 			console.log();
 		}
 	});
+
+function getGitStatus() {
+	try {
+		const stdout = execSync(`git status --porcelain`, {
+			stdio: ["pipe", "pipe", "ignore"],
+		}).toString();
+		return stdout.trim();
+	} catch (e) {
+		return "";
+	}
+}
+
+function tryGitAdd(appPath) {
+	try {
+		spawnSync(
+			"git",
+			["add", path.join(appPath, "config"), path.join(appPath, ".")],
+			{
+				stdio: "inherit",
+			},
+		);
+
+		return true;
+	} catch (e) {
+		return false;
+	}
+}
+
+function getNewFilePath(file) {
+	const filepath = file
+		.replace(ownPath, appPath)
+		.replace(new RegExp(`(\\\\|\\/|\\\\\\\\)${folder}`, "g"), "");
+
+	return filepath;
+}
+
+function writeFileSync(path, contents, cb) {
+	fs.ensureDirSync(getDirName(path));
+
+	fs.writeFileSync(path, contents, cb);
+}
