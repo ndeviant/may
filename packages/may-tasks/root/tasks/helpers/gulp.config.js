@@ -21,10 +21,13 @@ const root = {
 	src: userOptions.root.src || "./src",
 	public: userOptions.root.public || "./public",
 	build: userOptions.root.build || "./build",
-	assets: "",
+	assets: userOptions.root.assets || "assets",
 };
 
-root.assets = userOptions.root.assets || `${root.build}/assets`;
+const assets = {
+	public: `${root.public}/${root.assets}`,
+	build: `${root.build}/${root.assets}`,
+};
 
 /**
  * Bsync config:
@@ -62,7 +65,7 @@ publicAssets.watch = publicAssets.src;
  */
 
 let cleanFiles = {
-	src: [`${root.build}/*.{html, htaccess}`, `${root.assets}/*`],
+	src: [`${root.build}/*.{html, htaccess}`, `${assets.build}/*`],
 	run: true,
 };
 
@@ -93,7 +96,7 @@ views = {
 
 let styles = {
 	src: `${root.src}/scss/*.scss`,
-	build: `${root.assets}/css/`,
+	build: `${assets.build}/css/`,
 	watch: `${root.src}/scss/**/*.scss`,
 	run: true,
 };
@@ -109,7 +112,7 @@ styles = {
 
 let scripts = {
 	src: `${root.src}/js/main.js`,
-	build: `${root.assets}/js/`,
+	build: `${assets.build}/js/`,
 	watch: `${root.src}/js/**/*.js`,
 	run: true,
 };
@@ -125,7 +128,7 @@ scripts = {
 
 let webp = {
 	src: `${root.src}/images/**/*_webp.{jpg,jpeg,png}`,
-	build: `${root.assets}/images/`,
+	build: `${assets.build}/images/`,
 	run: true,
 };
 
@@ -142,7 +145,7 @@ webp = {
 
 let favs = {
 	src: `${root.src}/images/favicon.{jpg,jpeg,png,gif,svg}`,
-	build: `${root.src}/images/favicons/`,
+	build: `${assets.public}/images/favicons/`,
 	run: true,
 };
 
@@ -159,7 +162,7 @@ favs = {
 
 let svg = {
 	src: `${root.src}/images/svg/**/*.svg`,
-	build: `${root.src}/images/`,
+	build: `${assets.public}/images/`,
 	run: true,
 };
 
@@ -180,7 +183,7 @@ let images = {
 		`!${svg.src}`,
 		`!${favs.src}`,
 	],
-	build: `${root.assets}/images/`,
+	build: `${assets.build}/images/`,
 	run: true,
 };
 
