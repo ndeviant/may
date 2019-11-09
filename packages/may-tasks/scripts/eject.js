@@ -66,19 +66,19 @@ inquirer
 		}
 
 		const gitStatus = getGitStatus();
-		if (gitStatus) {
-			console.error(
-				`${chalk.red(
-					"This git repository has untracked files or uncommitted changes:",
-				)}\n\n${gitStatus
-					.split("\n")
-					.map(line => line.match(/ .*/g)[0].trim())
-					.join("\n")}\n\n${chalk.red(
-					"Remove untracked files, stash or commit any changes, and try again.",
-				)}`,
-			);
-			process.exit(1);
-		}
+		// if (gitStatus) {
+		// 	console.error(
+		// 		`${chalk.red(
+		// 			"This git repository has untracked files or uncommitted changes:",
+		// 		)}\n\n${gitStatus
+		// 			.split("\n")
+		// 			.map(line => line.match(/ .*/g)[0].trim())
+		// 			.join("\n")}\n\n${chalk.red(
+		// 			"Remove untracked files, stash or commit any changes, and try again.",
+		// 		)}`,
+		// 	);
+		// 	process.exit(1);
+		// }
 
 		console.log("Ejecting...");
 
@@ -86,13 +86,18 @@ inquirer
 
 		const folder = "root";
 
-		function verifyAbsent(file) {
-			console.log("file: ", file);
-			const filepath = file.replace(ownPath, appPath).replace(`/${folder}`, "");
-			console.log("filepath", filepath);
-			process.exit(1);
+		function getNewFilePath(file) {
+			const filepath = file
+				.replace(ownPath, appPath)
+				.replace(new RegExp(`(\\\\|\\/|\\\\\\\\)${folder}`, "g"), "");
 
-			if (fs.existsSync(path.join(appPath, filepath))) {
+			return filepath;
+		}
+
+		function verifyAbsent(file) {
+			const filepath = getNewFilePath(file);
+
+			if (fs.existsSync(filepath)) {
 				console.error(
 					`\`${filepath}\` already exists in your app folder. We cannot ` +
 						"continue as you would lose all the changes in that file or directory. " +
@@ -137,7 +142,7 @@ inquirer
 				)
 				.trim()}\n`;
 			console.log(`  Adding ${cyan(file.replace(ownPath, ""))} to the project`);
-			fs.writeFileSync(file.replace(ownPath, appPath), content);
+			fs.writeFileSync(getNewFilePath(file), content);
 		});
 		console.log();
 
@@ -189,11 +194,11 @@ inquirer
 				}
 				appPackage.scripts[key] = appPackage.scripts[key].replace(
 					regex,
-					"node scripts/$1.js",
+					"gulp $1.js",
 				);
 				console.log(
 					`  Replacing ${cyan(`"${binKey} ${key}"`)} with ${cyan(
-						`"node scripts/${key}.js"`,
+						`"gulp ${key}"`,
 					)}`,
 				);
 			});
@@ -201,20 +206,6 @@ inquirer
 
 		console.log();
 		console.log(cyan("Configuring package.json"));
-
-		// Add Babel config
-		console.log(`  Adding ${cyan("Babel")} preset`);
-		appPackage.babel = {
-			presets: ["react-app"],
-		};
-
-		// Add ESlint config
-		if (!appPackage.eslintConfig) {
-			console.log(`  Adding ${cyan("ESLint")} configuration`);
-			appPackage.eslintConfig = {
-				extends: "react-app",
-			};
-		}
 
 		fs.writeFileSync(
 			path.join(appPath, "package.json"),
