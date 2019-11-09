@@ -24,7 +24,7 @@ const views = () =>
 				filters,
 			}),
 		)
-		.pipe(gulp.dest(config.tasks.views.dist))
+		.pipe(gulp.dest(config.tasks.views.build))
 		.on("end", plugins.browserSync.reload);
 
 module.exports.views = views;

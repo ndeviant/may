@@ -9,7 +9,7 @@ const images = () =>
 	gulp
 		.src(config.tasks.images.src)
 		.pipe(plumbed("Images"))
-		.pipe(plugins.changed(config.tasks.images.dist))
+		.pipe(plugins.changed(config.tasks.images.build))
 		.pipe(
 			plugins.if(
 				isProduction,
@@ -45,7 +45,7 @@ const images = () =>
 				]),
 			),
 		)
-		.pipe(gulp.dest(config.tasks.images.dist))
+		.pipe(gulp.dest(config.tasks.images.build))
 		.pipe(
 			plugins.debug({
 				title: "Images",

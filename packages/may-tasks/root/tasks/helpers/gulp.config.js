@@ -19,11 +19,11 @@ const userOptions = merge(
  */
 const root = {
 	src: userOptions.root.src || "./src",
-	dist: userOptions.root.dist || "./dist",
+	build: userOptions.root.build || "./build",
 	assets: "",
 };
 
-root.assets = userOptions.root.assets || `${root.dist}/assets`;
+root.assets = userOptions.root.assets || `${root.build}/assets`;
 
 /**
  * Bsync config:
@@ -31,7 +31,7 @@ root.assets = userOptions.root.assets || `${root.dist}/assets`;
  */
 
 const bsyncConfig = {
-	server: root.dist,
+	server: root.build,
 	notify: false,
 	online: !!userOptions.browserSync.tunnel,
 	middleware: [],
@@ -41,7 +41,7 @@ const bsyncConfig = {
 /**
  * Tasks config:
  * Default configs for tasks. Has default `run: true`, on each.
- * Has `src, dist, watch` fields. Watch is often reffering to src.
+ * Has `src, build, watch` fields. Watch is often reffering to src.
  */
 
 /**
@@ -49,7 +49,7 @@ const bsyncConfig = {
  */
 
 let cleanFiles = {
-	src: [`${root.dist}/*.{html, htaccess}`, `${root.dist}/assets/*`],
+	src: [`${root.build}/*.{html, htaccess}`, `${root.build}/assets/*`],
 	run: true,
 };
 
@@ -64,7 +64,7 @@ cleanFiles = {
 
 let views = {
 	src: `${root.src}/views/pages/*.htm`,
-	dist: root.dist,
+	build: root.build,
 	watch: `${root.src}/views/**/*.htm`,
 	run: true,
 };
@@ -80,7 +80,7 @@ views = {
 
 let styles = {
 	src: `${root.src}/scss/*.scss`,
-	dist: `${root.assets}/css/`,
+	build: `${root.assets}/css/`,
 	watch: `${root.src}/scss/**/*.scss`,
 	run: true,
 };
@@ -96,7 +96,7 @@ styles = {
 
 let scripts = {
 	src: `${root.src}/js/main.js`,
-	dist: `${root.assets}/js/`,
+	build: `${root.assets}/js/`,
 	watch: `${root.src}/js/**/*.js`,
 	run: true,
 };
@@ -112,7 +112,7 @@ scripts = {
 
 let webp = {
 	src: `${root.src}/images/**/*_webp.{jpg,jpeg,png}`,
-	dist: `${root.assets}/images/`,
+	build: `${root.assets}/images/`,
 	run: true,
 };
 
@@ -129,7 +129,7 @@ webp = {
 
 let favs = {
 	src: `${root.src}/images/favicon.{jpg,jpeg,png,gif,svg}`,
-	dist: `${root.src}/images/favicons/`,
+	build: `${root.src}/images/favicons/`,
 	run: true,
 };
 
@@ -146,7 +146,7 @@ favs = {
 
 let svg = {
 	src: `${root.src}/images/svg/**/*.svg`,
-	dist: `${root.src}/images/`,
+	build: `${root.src}/images/`,
 	run: true,
 };
 
@@ -167,7 +167,7 @@ let images = {
 		`!${svg.src}`,
 		`!${favs.src}`,
 	],
-	dist: `${root.dist}/assets/images/`,
+	build: `${root.build}/assets/images/`,
 	run: true,
 };
 
@@ -184,7 +184,7 @@ images = {
 
 let htaccess = {
 	src: `${root.src}/.htaccess`,
-	dist: root.dist,
+	build: root.build,
 	run: true,
 };
 
@@ -210,7 +210,7 @@ let assets = {
 		`!${root.src}/images/**/*`,
 		`!${htaccess.src}`,
 	],
-	dist: root.assets,
+	build: root.assets,
 	run: true,
 };
 

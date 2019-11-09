@@ -1,8 +1,8 @@
 const path = require("path");
 const { config } = require("./gulp.config");
 
-const { dist, assets } = config.root;
-const distAssets = assets.replace(dist, "");
+const { build, assets } = config.root;
+const buildAssets = assets.replace(build, "");
 
 const pathJoin = (...args) => {
 	return path.join(...args).replace(/\\/g, "/");
@@ -12,7 +12,7 @@ const filters = [
 	{
 		name: "media",
 		func: value => {
-			return pathJoin("./", `${distAssets}/media`, value);
+			return pathJoin("./", `${buildAssets}/media`, value);
 		},
 	},
 	{

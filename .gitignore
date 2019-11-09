@@ -11,5 +11,6 @@ ehthumbs.db
 Thumbs.db
 node_modules
 dist
+build
 yarn-error.log
 package-lock.json

@@ -22,7 +22,7 @@ const webpackConfig = {
 
 	output: {
 		filename: "[name].js",
-		path: path.join(cwd, config.tasks.scripts.dist),
+		path: path.join(cwd, config.tasks.scripts.build),
 		publicPath,
 	},
 

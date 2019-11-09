@@ -22,7 +22,7 @@ const favs = () =>
 				},
 			}),
 		)
-		.pipe(gulp.dest(config.tasks.favs.dist))
+		.pipe(gulp.dest(config.tasks.favs.build))
 		.pipe(
 			plugins.debug({
 				title: "Favicons",

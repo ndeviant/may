@@ -9,7 +9,7 @@ const webp = () =>
 	gulp
 		.src(config.tasks.webp.src)
 		.pipe(plumbed("WebP"))
-		.pipe(plugins.changed(config.tasks.webp.dist))
+		.pipe(plugins.changed(config.tasks.webp.build))
 		.pipe(
 			plugins.webp(
 				plugins.if(
@@ -22,7 +22,7 @@ const webp = () =>
 				),
 			),
 		)
-		.pipe(gulp.dest(config.tasks.webp.dist))
+		.pipe(gulp.dest(config.tasks.webp.build))
 		.pipe(
 			plugins.debug({
 				title: "WebP images",

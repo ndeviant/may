@@ -43,7 +43,7 @@ The build mode implies project optimization: image compression, autoprefixing of
 
 ```
 may-starter
-├── dist
+├── build
 ├── src
 │   ├── fonts
 │   ├── images
@@ -81,7 +81,7 @@ may-starter
   - Site pages: `src/views/pages`
     - `src/views/data.js` — Data for templates
   - Apache web server configuration file with settings [gzip](https://habr.com/ru/post/221849/) (lossless compression): `src/.htaccess`
-- Folder `dist` folder from which you run a local server for development purposes (when you run `npm run start`)
+- Folder `build` folder from which you run a local server for development purposes (when you run `npm run start`)
 
 ## Usage guidelines
 
@@ -120,7 +120,7 @@ Webp support is included in the starter. WebP is a graphics format developed by 
 Starter kit, is designed for CMS landing. Media folder for images, not to mix design images and images wich will be uploaded dynamically. Html is already splitted into chunks. Added couple of filter's to twig to land the frontend to the backend with pleasure:
 
 - `theme`: Use `theme` to specify path's for theme assets. Ex: `{{ "assets/images/sprite.svg#svg-logo" | theme }}`.
-- `media`: Use `media` to specify path's for media files. Reffers to the `dist/media` folder by default, so you shouldn't write a full path. Ex: `{{ "post1.jpg" | media }}`.
+- `media`: Use `media` to specify path's for media files. Reffers to the `build/media` folder by default, so you shouldn't write a full path. Ex: `{{ "post1.jpg" | media }}`.
 - `page`: Just set the name of html page, without extension, to create a link to it. Ex: `href="{{ "blog" | page }}"`.
 
 You may simply not use these filters, but I would recommend you to. Also, these filters were "mocked" from OctoberCMS, so this will increase the speed of your development for it. But they are also useful for any other backend, because these paths are always dynamic, and you can simply search for those filters through files and change them according to your needs.

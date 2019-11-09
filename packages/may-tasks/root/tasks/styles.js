@@ -50,7 +50,7 @@ const styles = () =>
 		)
 		.pipe(plugins.plumber.stop())
 		.pipe(plugins.if(!isProduction, plugins.sourcemaps.write()))
-		.pipe(gulp.dest(config.tasks.styles.dist))
+		.pipe(gulp.dest(config.tasks.styles.build))
 		.pipe(
 			plugins.debug({
 				title: "CSS files",

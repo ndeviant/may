@@ -36,7 +36,7 @@ const svg = () =>
 			}),
 		)
 		.pipe(plugins.plumber.stop())
-		.pipe(gulp.dest(config.tasks.svg.dist))
+		.pipe(gulp.dest(config.tasks.svg.build))
 		.pipe(
 			plugins.debug({
 				title: "Svg sprite",
