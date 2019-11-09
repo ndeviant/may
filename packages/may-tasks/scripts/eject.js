@@ -14,10 +14,16 @@ const chalk = require("chalk");
 const inquirer = require("inquirer");
 const spawnSync = require("cross-spawn").sync;
 const os = require("os");
-const paths = require("../config/paths");
 
 const { green } = chalk;
 const { cyan } = chalk;
+
+const paths = {
+	appPath: fs.realpathSync(process.cwd()),
+	ownPath: path.resolve(__dirname, "../."),
+};
+
+paths.yarnLockFile = path.resolve(paths.appPath, "./yarn.lock");
 
 function getGitStatus() {
 	try {
@@ -34,7 +40,7 @@ function tryGitAdd(appPath) {
 	try {
 		spawnSync(
 			"git",
-			["add", path.join(appPath, "config"), path.join(appPath, "scripts")],
+			["add", path.join(appPath, "config"), path.join(appPath, ".")],
 			{
 				stdio: "inherit",
 			},
@@ -76,13 +82,19 @@ inquirer
 
 		console.log("Ejecting...");
 
-		const { ownPath } = paths;
-		const { appPath } = paths;
+		const { ownPath, appPath } = paths;
+
+		const folder = "root";
 
 		function verifyAbsent(file) {
-			if (fs.existsSync(path.join(appPath, file))) {
+			console.log("file: ", file);
+			const filepath = file.replace(ownPath, appPath).replace(`/${folder}`, "");
+			console.log("filepath", filepath);
+			process.exit(1);
+
+			if (fs.existsSync(path.join(appPath, filepath))) {
 				console.error(
-					`\`${file}\` already exists in your app folder. We cannot ` +
+					`\`${filepath}\` already exists in your app folder. We cannot ` +
 						"continue as you would lose all the changes in that file or directory. " +
 						"Please move or delete it (maybe make a copy for backup) and run this " +
 						"command again.",
@@ -91,30 +103,19 @@ inquirer
 			}
 		}
 
-		const folders = ["config", "config/jest", "scripts"];
-
 		// Make shallow array of files paths
-		const files = folders.reduce((files, folder) => {
-			return files.concat(
-				fs
-					.readdirSync(path.join(ownPath, folder))
-					// set full path
-					.map(file => path.join(ownPath, folder, file))
-					// omit dirs from file list
-					.filter(file => fs.lstatSync(file).isFile()),
-			);
-		}, []);
+		const files = fs
+			.readdirSync(path.join(ownPath, folder))
+			// set full path
+			.map(file => path.join(ownPath, folder, file))
+			// omit dirs from file list
+			.filter(file => fs.lstatSync(file).isFile());
 
 		// Ensure that the app folder is clean and we won't override any files
-		folders.forEach(verifyAbsent);
 		files.forEach(verifyAbsent);
 
 		console.log();
 		console.log(cyan(`Copying files into ${appPath}`));
-
-		folders.forEach(folder => {
-			fs.mkdirSync(path.join(appPath, folder));
-		});
 
 		files.forEach(file => {
 			let content = fs.readFileSync(file, "utf8");
@@ -146,7 +147,7 @@ inquirer
 		console.log(cyan("Updating the dependencies"));
 		const ownPackageName = ownPackage.name;
 		if (appPackage.devDependencies) {
-			// We used to put react-scripts in devDependencies
+			// If user moved may-tasks to devDependencies
 			if (appPackage.devDependencies[ownPackageName]) {
 				console.log(`  Removing ${cyan(ownPackageName)} from devDependencies`);
 				delete appPackage.devDependencies[ownPackageName];
