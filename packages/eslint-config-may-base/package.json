@@ -1,29 +1,29 @@
 {
-  "name": "eslint-config-may-base",
-  "version": "0.0.1",
-  "description": "ESLint configuration used by May",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ndeviant/may.git",
-    "directory": "packages/eslint-config-may-base"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ndeviant/may/issues"
-  },
-  "files": [
-    "index.js"
-  ],
-  "peerDependencies": {
-    "eslint": "6.x",
-    "prettier": "1.x"
-  },
-  "dependencies": {
-    "babel-eslint": "^10.0.2",
-    "confusing-browser-globals": "^1.0.8",
-    "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-config-prettier": "^6.0.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-prettier": "^3.1.0"
-  }
+	"name": "eslint-config-may-base",
+	"version": "0.0.1",
+	"description": "ESLint configuration used by May",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ndeviant/may.git",
+		"directory": "packages/eslint-config-may-base"
+	},
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/ndeviant/may/issues"
+	},
+	"files": [
+		"index.js"
+	],
+	"peerDependencies": {
+		"eslint": "6.x",
+		"prettier": "1.x"
+	},
+	"dependencies": {
+		"babel-eslint": "10.0.2",
+		"confusing-browser-globals": "1.0.8",
+		"eslint-config-airbnb-base": "14.0.0",
+		"eslint-config-prettier": "6.0.0",
+		"eslint-plugin-import": "2.18.2",
+		"eslint-plugin-prettier": "3.1.0"
+	}
 }

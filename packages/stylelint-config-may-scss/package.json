@@ -1,27 +1,27 @@
 {
-  "name": "stylelint-config-may-scss",
-  "version": "0.0.1",
-  "description": "Stylelint configuration used by May",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ndeviant/may.git",
-    "directory": "packages/stylelint-config-may-scss"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ndeviant/may/issues"
-  },
-  "files": [
-    "index.js"
-  ],
-  "peerDependencies": {
-    "prettier": "1.x",
-    "stylelint": "10.x"
-  },
-  "dependencies": {
-    "prettier-stylelint": "^0.4.2",
-    "stylelint-config-prettier": "^5.2.0",
-    "stylelint-config-recommended-scss": "^3.3.0",
-    "stylelint-scss": "^3.9.3"
-  }
+	"name": "stylelint-config-may-scss",
+	"version": "0.0.1",
+	"description": "Stylelint configuration used by May",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ndeviant/may.git",
+		"directory": "packages/stylelint-config-may-scss"
+	},
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/ndeviant/may/issues"
+	},
+	"files": [
+		"index.js"
+	],
+	"peerDependencies": {
+		"prettier": "1.x",
+		"stylelint": "10.x"
+	},
+	"dependencies": {
+		"prettier-stylelint": "0.4.2",
+		"stylelint-config-prettier": "5.2.0",
+		"stylelint-config-recommended-scss": "3.3.0",
+		"stylelint-scss": "3.9.3"
+	}
 }
