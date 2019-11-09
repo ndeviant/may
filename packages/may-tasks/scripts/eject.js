@@ -66,19 +66,19 @@ inquirer
 		}
 
 		const gitStatus = getGitStatus();
-		// if (gitStatus) {
-		// 	console.error(
-		// 		`${chalk.red(
-		// 			"This git repository has untracked files or uncommitted changes:",
-		// 		)}\n\n${gitStatus
-		// 			.split("\n")
-		// 			.map(line => line.match(/ .*/g)[0].trim())
-		// 			.join("\n")}\n\n${chalk.red(
-		// 			"Remove untracked files, stash or commit any changes, and try again.",
-		// 		)}`,
-		// 	);
-		// 	process.exit(1);
-		// }
+		if (gitStatus) {
+			console.error(
+				`${chalk.red(
+					"This git repository has untracked files or uncommitted changes:",
+				)}\n\n${gitStatus
+					.split("\n")
+					.map(line => line.match(/ .*/g)[0].trim())
+					.join("\n")}\n\n${chalk.red(
+					"Remove untracked files, stash or commit any changes, and try again.",
+				)}`,
+			);
+			process.exit(1);
+		}
 
 		console.log("Ejecting...");
 
@@ -187,21 +187,16 @@ inquirer
 		console.log(cyan("Updating the scripts"));
 		delete appPackage.scripts.eject;
 		Object.keys(appPackage.scripts).forEach(key => {
-			Object.keys(ownPackage.bin).forEach(binKey => {
-				const regex = new RegExp(`${binKey} (\\w+)`, "g");
-				if (!regex.test(appPackage.scripts[key])) {
-					return;
-				}
-				appPackage.scripts[key] = appPackage.scripts[key].replace(
-					regex,
-					"gulp $1.js",
-				);
-				console.log(
-					`  Replacing ${cyan(`"${binKey} ${key}"`)} with ${cyan(
-						`"gulp ${key}"`,
-					)}`,
-				);
-			});
+			const regex = new RegExp(`${ownPackage.name}`, "g");
+			if (!regex.test(appPackage.scripts[key])) {
+				return;
+			}
+			appPackage.scripts[key] = appPackage.scripts[key].replace(regex, "gulp");
+			console.log(
+				`  Replacing ${cyan(`"${ownPackage.name} ${key}"`)} with ${cyan(
+					`"gulp ${key}"`,
+				)}`,
+			);
 		});
 
 		console.log();
@@ -216,7 +211,7 @@ inquirer
 		// "Don't destroy what isn't ours"
 		if (ownPath.indexOf(appPath) === 0) {
 			try {
-				// remove react-scripts and react-scripts binaries from app node_modules
+				// remove may-tasks and may-tasks binaries from app node_modules
 				Object.keys(ownPackage.bin).forEach(binKey => {
 					fs.removeSync(path.join(appPath, "node_modules", ".bin", binKey));
 				});
