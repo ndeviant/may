@@ -2,7 +2,7 @@
 	"name": "may",
 	"author": "Nikolai Kolosovskyi <kpoccep@yandex.ru>",
 	"description": "Frontend development with pleasure",
-	"version": "0.0.9",
+	"version": "0.0.13",
 	"private": true,
 	"repository": {
 		"type": "git",
