@@ -16,5 +16,6 @@ const setEnv = env => {
 module.exports.setEnv = setEnv;
 
 module.exports.setEnvByTask = task => {
+	if (process.env.NODE_ENV) return;
 	setEnv(envs[task]);
 };

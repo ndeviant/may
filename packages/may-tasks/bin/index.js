@@ -20,11 +20,12 @@ const isFileScript = runFileScript({ args });
 if (isFileScript) return;
 
 // Run gulp task
+const gulpbin = path.resolve(__dirname, "../node_modules/.bin/gulp");
 const gulpfile = path.resolve(__dirname, "../root/", "gulpfile.js");
 const cwd = process.cwd();
 
 setEnvByTask(args[0]);
 
-spawn.sync("gulp", ["--gulpfile", gulpfile, "--cwd", cwd, ...args], {
+spawn.sync(gulpbin, ["--gulpfile", gulpfile, "--cwd", cwd, ...args], {
 	stdio: "inherit",
 });
