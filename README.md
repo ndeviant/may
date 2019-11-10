@@ -20,12 +20,11 @@
 - using the preprocessor [SCSS](https://sass-lang.com/)
 - using the bootstrap grid [Bootstrap](https://getbootstrap.com/)
 - using the transpiler [Babel](https://babeljs.io/) to support modern JavaScript (ES6) in browsers
-- use [Webpack](https://webpack.js.org/) to build JavaScript modules
+- using the bundler [Webpack](https://webpack.js.org/) to build JavaScript modules
 
 ## Installation
 
 ```sh
-npm install -g gulp-cli
 npx create-may-app my-app
 cd my-app
 npm start
@@ -45,17 +44,21 @@ The build mode implies project optimization: image compression, autoprefixing of
 ```
 may-starter
 ├── build
-├── src
+├── public
 │   ├── fonts
+│   ├── media
 │   ├── images
 │   │   ├── favicons
+│   │   └── sprite.svg
+│   └── .htaccess
+├── src
+│   ├── images
+│   │   ├── favicon.{image type}
 │   │   └── svg
-│   ├── media
 │   ├── js
 │   ├── scss
-│   ├── views
-│   │   └── data.js
-│   └── .htaccess
+│   └── views
+│       └── data.js
 ├── may.config.js
 ├── package.json
 ├── .eslintrc.js
@@ -70,19 +73,24 @@ may-starter
   - `.stylelintrc.js` — configure Stylelint
   - `.gitignore` – a ban on tracking files Git
   - `may.config.js` — Gulp tasks settings
+- Folder `public` - Define files to be moved at the root of build folder (e.g. .htaccess).
+  - fonts: `public/assets/fonts`
+  - media files, wich will be deleted, after landing on backend: `public/assets/media`
+  - images: `public/assets/images`
+    - favicons, generated from `src/images/favicon.{img}`: `public/assets/images/favicons`
+    - svg sprite, generated from `src/images/svg/**/*.{svg}`: `public/assets/images/sprite.svg`
+  - Apache web server configuration file with settings [gzip](https://habr.com/ru/post/221849/) (lossless compression): `public/.htaccess`
 - Folder `src` - used during development:
-  - fonts: `src/fonts`
   - images: `src/images`
-    - favicons, generated from `src/images/favicon.{img}`: `src/images/favicons`
-    - svg sprite, generated from `src/images/svg/**/*.{svg}`: `src/images/sprite.svg`
-  - media files, wich will be deleted, after landing on CMS: `src/media`
+    - favicon, generates from `src/images/favicon.{img}`, to `public/assets/images/favicons`
+    - svg sprite, generates from `src/images/svg/**/*.{svg}`, to `public/assets/images/sprite.svg`
+    - all other images are moving to build folder, which are optimized if using `build` task
   - JS files: `src/js`
   - SCSS files: `src/styles`
   - Twig files: `src/views`
-  - Site pages: `src/views/pages`
-    - `src/views/data.js` — Data for templates
-  - Apache web server configuration file with settings [gzip](https://habr.com/ru/post/221849/) (lossless compression): `src/.htaccess`
-- Folder `build` folder from which you run a local server for development purposes (when you run `npm run start`)
+    - Site pages: `src/views/pages`
+    - Data for templates – `src/views/data.js`
+- Folder `build` folder from which you run a local server for development purposes (when you run `npm run start`), or contains optimized files after `npm run build` command.
 
 ## Usage guidelines
 
@@ -90,13 +98,14 @@ may-starter
 - stick component approach to the development of sites
   - SCSS-file of a component is imported to `src/styles/main.scss` file, JS-file is imported to `src/js/main.js`
 - from all SCSS files, only `main.scss` is compiled. Other style files are imported into it
-- pages located in the folder `src/pages`
+- pages located in the folder `src/views/pages`
   - each page (including the main page) inherits the `src/views/layouts/default.htm` template
   - main page: `src/views/pages/index.htm`
-- fonts are in `src/fonts` folder, use `ttf`, `woff` and `woof2` formats
+  - all pages should be at the root of `pages` directory: `src/views/pages/blog/index.htm` – not allowed
+- fonts are in `public/assets/fonts` folder, use `ttf`, `woff` and `woof2` formats
 - images are in the folder `src/images`
-  - the image for generating favicons should be `src/images/favicon.[your extension]`, and have a size of at least `100px x 100px`. Favicons will be generated to `src/images/favicons`, for better performance better to disable `favs` task, after you generated your favicons.
-  - icons from `src/images/svg` folder are collected in one svg sprite at `src/images/sprite.svg`.
+  - the image for generating favicons should be `src/images/favicon.[your extension]`, and have a size of at least `100px x 100px`. Favicons will be generated to `public/assets/images/favicons`, for better performance better to disable `favs` task, after you generated your favicons.
+  - icons from `src/images/svg` folder are collected in one svg sprite at `public/assets/images/sprite.svg`.
   - pictures that are not part of the design, and will later be loaded from the CMS put in the folder `src/media`. Ex: post images, product pictures.
 - all third-party libraries are installing in the `node_modules` folder
   - to install another, use `npm install [package_name]` command
@@ -110,7 +119,7 @@ The build collects all svgs from the `src/images/svg` folder into a single sprit
 
 ## Favicon
 
-In the starter included auto-generation of favicons. By default, the task generates favicons to `src/images/favicons` folder. This task takes a lot of time, so its recommended to turn it off in configuration file by setting it to `run: false`, after you've already created a favicons for the first time.
+In the starter included auto-generation of favicons. By default, the task generates favicons to `public/assets/images/favicons` folder. This task takes a lot of time, so its recommended to turn it off in configuration file by setting it to `run: false`, after you've already created a favicons for the first time. Or just create them once with the `may-tasks favs` command (you should add this field to package.json to make it work, e.g. `'favs': 'may-tasks favs'`, `npm run favs`).
 
 ## WebP 
 
@@ -125,6 +134,10 @@ Starter kit, is designed for CMS landing. Media folder for images, not to mix de
 - `page`: Just set the name of html page, without extension, to create a link to it. Ex: `href="{{ "blog" | page }}"`.
 
 You may simply not use these filters, but I would recommend you to. Also, these filters were "mocked" from OctoberCMS, so this will increase the speed of your development for it. But they are also useful for any other backend, because these paths are always dynamic, and you can simply search for those filters through files and change them according to your needs.
+
+## IDE configuration
+
+It's recommended to configure your IDE with defined linting rules. Example for VS code: [here](https://www.freecodecamp.org/news/integrating-prettier-with-eslint-and-stylelint-99e74fede33f/).
 
 ## Contacts
 
