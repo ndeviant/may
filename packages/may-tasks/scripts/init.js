@@ -97,6 +97,7 @@ module.exports = function init(
 	appPackage.scripts = {
 		start: "may-tasks develop",
 		build: "may-tasks build",
+		eject: "may-tasks eject",
 		tasks: "may-tasks --tasks",
 	};
 
