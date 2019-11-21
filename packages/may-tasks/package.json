@@ -1,6 +1,6 @@
 {
 	"name": "may-tasks",
-	"version": "0.0.14",
+	"version": "0.0.15",
 	"description": "Configuration and tasks for May.",
 	"author": "Nikolai Kolosovskyi",
 	"repository": {
@@ -37,6 +37,7 @@
 		"css-mqpacker": "7.0.0",
 		"eslint": "6.1.0",
 		"eslint-config-may-base": "0.0.1",
+		"find-up": "^4.1.0",
 		"fs-extra": "8.1.0",
 		"gulp": "4.0.2",
 		"gulp-changed": "4.0.0",
