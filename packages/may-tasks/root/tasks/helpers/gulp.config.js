@@ -81,7 +81,7 @@ cleanFiles = {
 let views = {
 	src: `${root.src}/views/pages/*.htm`,
 	build: root.build,
-	watch: `${root.src}/views/**/*.htm`,
+	watch: [`${root.src}/views/**/*.htm`, `${root.src}/views/**/*.js`],
 	run: true,
 };
 
