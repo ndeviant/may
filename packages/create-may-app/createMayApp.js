@@ -209,20 +209,20 @@ function createApp(name, verbose, version, useNpm, usePnp, template) {
 	}
 
 	if (useYarn) {
-		let yarnUsesDefaultRegistry = true;
 		try {
-			yarnUsesDefaultRegistry =
+			const yarnUsesDefaultRegistry =
 				execSync("yarnpkg config get registry")
 					.toString()
 					.trim() === "https://registry.yarnpkg.com";
+
+			if (yarnUsesDefaultRegistry) {
+				fs.copySync(
+					require.resolve("./cached.yarn.lock"),
+					path.join(root, "yarn.lock"),
+				);
+			}
 		} catch (e) {
 			// ignore
-		}
-		if (yarnUsesDefaultRegistry) {
-			fs.copySync(
-				require.resolve("./cached.yarn.lock"),
-				path.join(root, "yarn.lock"),
-			);
 		}
 	}
 

@@ -8,7 +8,7 @@ const cleanFiles = () =>
 		.src(config.tasks.cleanFiles.src, {
 			read: false,
 		})
-		.pipe(plugins.clean())
+		.pipe(plugins.clean({ force: true }))
 		.pipe(
 			plugins.debug({
 				title: "Cleaning...",

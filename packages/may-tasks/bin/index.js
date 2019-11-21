@@ -21,6 +21,7 @@ if (isFileScript) return;
 
 // Run gulp task
 const gulpbin = path.resolve(__dirname, "../node_modules/.bin/gulp");
+// const gulpbin = "gulp";
 const gulpfile = path.resolve(__dirname, "../root/", "gulpfile.js");
 const cwd = process.cwd();
 
