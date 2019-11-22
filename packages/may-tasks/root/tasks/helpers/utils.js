@@ -1,6 +1,5 @@
-const isProduction = process.env.NODE_ENV === "production";
-
-module.exports.isProduction = isProduction;
+const isProduction =
+	process.env.NODE_ENV === "production" || process.env.NODE_ENV === "staging";
 
 function moduleExists(path) {
 	try {
@@ -11,8 +10,6 @@ function moduleExists(path) {
 	}
 }
 
-module.exports.moduleExists = moduleExists;
-
 const resolveFunction = (userOption, defaultOption) => {
 	if (!userOption || typeof userOption !== "function") {
 		return userOption;
@@ -20,4 +17,8 @@ const resolveFunction = (userOption, defaultOption) => {
 	return userOption(defaultOption, isProduction);
 };
 
-module.exports.resolveFunction = resolveFunction;
+module.exports = {
+	isProduction,
+	moduleExists,
+	resolveFunction,
+};

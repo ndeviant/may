@@ -12,6 +12,7 @@
 		"start": "may-tasks develop",
 		"build": "may-tasks build",
 		"eject": "may-tasks eject",
+		"favs": "may-tasks favs",
 		"tasks": "may-tasks --tasks"
 	},
 	"dependencies": {

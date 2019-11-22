@@ -21,23 +21,21 @@ const root = {
 	src: userOptions.root.src || "./src",
 	public: userOptions.root.public || "./public",
 	build: userOptions.root.build || "./build",
-	assets: userOptions.root.assets || "assets",
+	assetsDirName: userOptions.root.assetsDirName || "assets",
 };
 
 const assets = {
-	public: `${root.public}/${root.assets}`,
-	build: `${root.build}/${root.assets}`,
+	public: `${root.public}/${root.assetsDirName}`,
+	build: `${root.build}/${root.assetsDirName}`,
 };
 
 /**
  * Bsync config:
- * Disables online, unless tunnel is on, for better performance;
  */
 
 const bsyncConfig = {
 	server: root.build,
 	notify: false,
-	online: !!userOptions.browserSync.tunnel,
 	middleware: [],
 	...userOptions.browserSync,
 };

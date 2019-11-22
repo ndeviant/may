@@ -2,7 +2,11 @@
  *	Here you can manage your build process.
  */
 
-const root = {};
+const root = {
+	src: "",
+	public: "",
+	build: "",
+};
 
 const browserSync = {};
 

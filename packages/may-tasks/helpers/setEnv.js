@@ -4,6 +4,7 @@ const TEST = "test";
 
 const envs = {
 	start: DEVELOPMENT,
+	develop: DEVELOPMENT,
 	build: PRODUCTION,
 	test: TEST,
 };
