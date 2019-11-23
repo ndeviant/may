@@ -1,7 +1,11 @@
 const path = require("path");
+const fs = require("fs");
 const { config } = require("./gulp.config");
 
-const { assets } = config.root;
+const { baseUrl } = config.root;
+const { src } = config.tasks.views;
+
+const pagesDir = path.join(src, "../..");
 
 const pathJoin = (...args) => {
 	return path.join(...args).replace(/\\/g, "/");
@@ -11,24 +15,27 @@ const filters = [
 	{
 		name: "media",
 		func: value => {
-			return pathJoin("./", `${assets}/media`, value);
+			return pathJoin(baseUrl, `media`, value);
 		},
 	},
 	{
 		name: "theme",
 		func: value => {
-			return pathJoin("./", value);
+			return pathJoin(baseUrl, value);
 		},
 	},
 	{
 		name: "page",
-		func: (value, args) => {
-			if (!value) return "/";
+		func: value => {
+			if (!value) return baseUrl;
 
-			let addition = "";
-			if (args) [addition] = args;
+			const htmExists = fs.existsSync(path.join(pagesDir, `${value}.htm`));
 
-			return pathJoin("/", `${value}${addition}.html`);
+			if (htmExists) {
+				return pathJoin(baseUrl, `${value}.html`);
+			}
+
+			return pathJoin(baseUrl, value);
 		},
 	},
 ];

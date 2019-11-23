@@ -1,6 +1,7 @@
 @import "bootstrap/scss/functions";
 @import "bootstrap/scss/variables";
 @import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
 
 // Rewrite bootstrap grid variables
 $grid-gutter-width: 30px;
@@ -14,13 +15,13 @@ $grid-breakpoints: (
 	md: 768px,
 	lg: 992px,
 	xl: 1200px,
-	xxl: 1600px
+	xxl: 1600px,
 );
 
 $container-max-widths: map-merge(
 	$container-max-widths,
 	(
-		xxl: 1570px
+		xxl: 1570px,
 	)
 );
 

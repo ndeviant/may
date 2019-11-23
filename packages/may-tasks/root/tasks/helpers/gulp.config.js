@@ -21,6 +21,7 @@ const root = {
 	src: userOptions.root.src || "./src",
 	public: userOptions.root.public || "./public",
 	build: userOptions.root.build || "./build",
+	baseUrl: userOptions.root.baseUrl || "/",
 	assetsDirName: userOptions.root.assetsDirName || "assets",
 };
 
@@ -77,9 +78,9 @@ cleanFiles = {
  */
 
 let views = {
-	src: `${root.src}/views/pages/*.htm`,
+	src: `${root.src}/views/pages/**/*.htm`,
 	build: root.build,
-	watch: [`${root.src}/views/**/*.htm`, `${root.src}/views/**/*.js`],
+	watch: `${root.src}/views/**/*.{htm, js}`,
 	run: true,
 };
 
