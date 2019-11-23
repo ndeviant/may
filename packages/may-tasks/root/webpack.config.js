@@ -8,21 +8,29 @@ const { isProduction } = require("./tasks/helpers/utils");
 
 const cwd = process.cwd();
 
-const publicPath =
-	config.bsyncConfig.proxy && config.bsyncConfig.proxy.target
-		? config.bsyncConfig.proxy.target
-		: "/";
+const { proxy } = config.bsyncConfig;
+const { baseUrl } = config.root;
+
+let publicPath = baseUrl;
+
+if (proxy && typeof proxy === "string") {
+	publicPath = proxy;
+}
+
+if (proxy && proxy.taget) {
+	publicPath = proxy.target;
+}
 
 const webpackConfig = {
 	entry: [
 		!isProduction && "webpack/hot/dev-server",
 		!isProduction && "webpack-hot-middleware/client",
-		path.join(cwd, config.tasks.scripts.src),
+		path.resolve(cwd, config.tasks.scripts.src),
 	].filter(Boolean),
 
 	output: {
 		filename: "[name].js",
-		path: path.join(cwd, config.tasks.scripts.build),
+		path: path.resolve(cwd, config.tasks.scripts.build),
 		publicPath,
 	},
 

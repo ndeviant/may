@@ -1,13 +1,12 @@
 .demo-section {
 	padding: 30px 0;
-	background-image: url("/assets/images/smiley.png");
-	background-image: url(/assets/images/smiley.png);
+	background-image: url("../images/smiley.png");
 	background-position: bottom right;
 	background-repeat: no-repeat;
 	background-size: 100px;
 
 	&__container {
-		padding-bottom: 20px;
+		padding: 0 0 20px;
 		display: flex;
 		flex-wrap: wrap;
 		list-style-type: none;

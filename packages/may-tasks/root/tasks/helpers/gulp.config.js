@@ -30,16 +30,29 @@ const assets = {
 	build: `${root.build}/${root.assetsDirName}`,
 };
 
+if (!root.baseUrl.startsWith("/")) {
+	root.baseUrl = `/${root.baseUrl}`;
+}
+
+if (!root.baseUrl.endsWith("/")) {
+	root.baseUrl = `${root.baseUrl}/`;
+}
+
 /**
  * Bsync config:
  */
 
 const bsyncConfig = {
-	server: root.build,
 	notify: false,
 	middleware: [],
 	...userOptions.browserSync,
 };
+
+if (!bsyncConfig.proxy) {
+	bsyncConfig.server = root.build;
+} else {
+	bsyncConfig.open = bsyncConfig.open || "external";
+}
 
 /**
  * Tasks config:
