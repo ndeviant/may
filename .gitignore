@@ -14,3 +14,4 @@ dist
 build
 yarn-error.log
 package-lock.json
+docusaurus
