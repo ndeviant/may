@@ -20,7 +20,6 @@ const svg = () =>
 					dimension: {
 						maxWidth: 32,
 						maxHeight: 32,
-						attributes: true,
 					},
 				},
 				mode: {
