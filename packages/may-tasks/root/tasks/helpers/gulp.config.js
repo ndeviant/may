@@ -21,6 +21,7 @@ const root = {
 	src: userOptions.root.src || "./src",
 	public: userOptions.root.public || "./public",
 	build: userOptions.root.build || "./build",
+	baseUrl: userOptions.root.baseUrl || "/",
 	assetsDirName: userOptions.root.assetsDirName || "assets",
 };
 
@@ -29,16 +30,29 @@ const assets = {
 	build: `${root.build}/${root.assetsDirName}`,
 };
 
+if (!root.baseUrl.startsWith("/")) {
+	root.baseUrl = `/${root.baseUrl}`;
+}
+
+if (!root.baseUrl.endsWith("/")) {
+	root.baseUrl = `${root.baseUrl}/`;
+}
+
 /**
  * Bsync config:
  */
 
 const bsyncConfig = {
-	server: root.build,
 	notify: false,
 	middleware: [],
 	...userOptions.browserSync,
 };
+
+if (!bsyncConfig.proxy) {
+	bsyncConfig.server = root.build;
+} else {
+	bsyncConfig.open = bsyncConfig.open || "external";
+}
 
 /**
  * Tasks config:
@@ -77,9 +91,9 @@ cleanFiles = {
  */
 
 let views = {
-	src: `${root.src}/views/pages/*.htm`,
+	src: `${root.src}/views/pages/**/*.htm`,
 	build: root.build,
-	watch: [`${root.src}/views/**/*.htm`, `${root.src}/views/**/*.js`],
+	watch: `${root.src}/views/**/*.{htm, js}`,
 	run: true,
 };
 

@@ -6,9 +6,13 @@ const root = {
 	src: "",
 	public: "",
 	build: "",
+	baseUrl: "",
+	assetsDirName: "",
 };
 
-const browserSync = {};
+const browserSync = {
+	proxy: "",
+};
 
 const tasks = {
 	cleanFiles: {},

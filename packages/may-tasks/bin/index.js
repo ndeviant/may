@@ -2,7 +2,6 @@
 
 const spawn = require("cross-spawn");
 const path = require("path");
-const findUp = require("find-up");
 
 const { setEnvByTask } = require("../helpers/setEnv");
 const { runFileScript } = require("../helpers/runFileScript");
@@ -22,10 +21,7 @@ if (isFileScript) return;
 
 // Run gulp task
 (async () => {
-	const nodeModulesDir = await findUp("node_modules", {
-		type: "directory",
-		cwd: __dirname,
-	});
+	const nodeModulesDir = path.resolve(require.resolve("gulp"), "../..");
 
 	const gulpbin = path.resolve(nodeModulesDir, ".bin/gulp");
 
