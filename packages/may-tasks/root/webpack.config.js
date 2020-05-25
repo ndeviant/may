@@ -21,12 +21,27 @@ if (proxy && proxy.taget) {
 	publicPath = proxy.target;
 }
 
+const { src } = config.tasks.scripts;
+
+const isEntryString = typeof src === "string";
+const entryObj = {};
+
+if (!isEntryString) {
+	Object.keys(src).forEach(key => {
+		entryObj[key] = path.resolve(cwd, src[key]);
+	});
+}
+
+const entry = isEntryString
+	? [
+			!isProduction && "webpack/hot/dev-server",
+			!isProduction && "webpack-hot-middleware/client",
+			path.resolve(cwd, src),
+	  ].filter(Boolean)
+	: entryObj;
+
 const webpackConfig = {
-	entry: [
-		!isProduction && "webpack/hot/dev-server",
-		!isProduction && "webpack-hot-middleware/client",
-		path.resolve(cwd, config.tasks.scripts.src),
-	].filter(Boolean),
+	entry,
 
 	output: {
 		filename: "[name].js",
