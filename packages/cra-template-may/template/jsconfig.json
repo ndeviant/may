@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "target": "esnext",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "allowUnreachableCode": true,
+    "baseUrl": "src",
+    "paths": {
+      "*": [
+        "*"
+      ]
+    }
+  },
+  "exclude": [  
+    "node_modules",
+    "public"
+  ]
+}

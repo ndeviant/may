@@ -1,0 +1,59 @@
+{
+  "name": "cra-template-may",
+  "version": "1.0.2",
+  "scripts": {
+    "prettify": "prettier --write './template/src/**/*.js'",
+    "lint": "eslint './template/src/**/*.js'",
+    "test": "jest"
+  },
+  "keywords": [
+    "react",
+    "create-react-app",
+    "template",
+    "redux",
+    "reduxjs",
+    "react-redux",
+    "material-ui"
+  ],
+  "description": "The Redux, Material UI template for Create React App.",
+  "main": "template.json",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ndeviant/cra-template-may.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=8"
+  },
+  "bugs": {
+    "url": "https://github.com/reduxjs/cra-template-may/issues"
+  },
+  "files": [
+    "template",
+    "template.json"
+  ],
+  "devDependencies": {
+    "@babel/preset-env": "^7.7.6",
+    "@babel/preset-react": "^7.7.4",
+    "@reduxjs/toolkit": "^1.1.0",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "babel-eslint": "^10.0.3",
+    "babel-jest": "^24.9.0",
+    "eslint": "^6.7.2",
+    "eslint-config-react-app": "^5.1.0",
+    "eslint-plugin-flowtype": "^4.5.2",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-react-hooks": "^2.3.0",
+    "jest": "^24.9.0",
+    "prettier": "^1.19.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-redux": "^7.1.3",
+    "react-test-renderer": "^16.12.0",
+    "redux": "^4.0.4"
+  }
+}
