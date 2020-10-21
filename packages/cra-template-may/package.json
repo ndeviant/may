@@ -1,11 +1,7 @@
 {
   "name": "cra-template-may",
-  "version": "1.0.2",
-  "scripts": {
-    "prettify": "prettier --write './template/src/**/*.js'",
-    "lint": "eslint './template/src/**/*.js'",
-    "test": "jest"
-  },
+  "version": "0.0.1",
+  "description": "The Redux, Material UI template for Create React App.",
   "keywords": [
     "react",
     "create-react-app",
@@ -15,7 +11,6 @@
     "react-redux",
     "material-ui"
   ],
-  "description": "The Redux, Material UI template for Create React App.",
   "main": "template.json",
   "repository": {
     "type": "git",
