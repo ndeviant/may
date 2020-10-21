@@ -20,7 +20,7 @@
         "git add"
       ]
     },
-    "eslintConfig": null,
+    "eslintConfig": {},
     "dependencies": {
       "@reduxjs/toolkit": "^1.1.0",
       "@testing-library/jest-dom": "^4.2.4",
@@ -45,9 +45,8 @@
       "react-router-dom": "5.2.0",
       "react-use-dimensions": "1.2.1",
       "use-debounce": "5.0.1",
-      "yup": "0.29.3"
-    },
-    "devDependencies": {
+      "yup": "0.29.3",
+
       "@babel/eslint-plugin": "7.11.5",
       "@babel/plugin-proposal-decorators": "7.10.5",
       "@babel/plugin-proposal-optional-chaining": "7.11.0",
