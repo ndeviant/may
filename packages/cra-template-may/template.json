@@ -7,7 +7,8 @@
       "test": "react-app-rewired test",
       "eject": "react-app-rewired eject",
       "analyze": "yarn build --analyze",
-      "serve": "serve -s build"
+      "serve": "serve -s build",
+      "lint": "./node_modules/.bin/eslint --fix -c .eslintrc.js src/**/*.js src/**/*.jsx"
     },
     "husky": {
       "hooks": {
@@ -26,19 +27,19 @@
       "@testing-library/jest-dom": "^4.2.4",
       "@testing-library/react": "^9.3.2",
       "@testing-library/user-event": "^7.1.2",
-      "react-redux": "^7.1.3",
-      
-      "@loadable/component": "5.13.2",
+      "react-redux": "7.2.1",
+
+      "@loadable/component": "5.14.1",
       "@material-ui/core": "4.11.0",
       "@material-ui/icons": "4.9.1",
       "@material-ui/lab": "4.0.0-alpha.56",
       "axios": "0.20.0",
       "clsx": "1.1.1",
       "date-fns": "2.16.1",
-      "formik": "2.1.5",
+      "formik": "2.2.0",
       "formik-material-ui": "3.0.0",
       "lodash-es": "4.17.15",
-      "notistack": "1.0.0",
+      "notistack": "1.0.1",
       "qs": "6.9.4",
       "react-helmet": "6.1.0",
       "react-merge-refs": "1.1.0",
@@ -46,24 +47,24 @@
       "react-use-dimensions": "1.2.1",
       "use-debounce": "5.0.1",
       "yup": "0.29.3",
-
-      "@babel/eslint-plugin": "7.11.5",
-      "@babel/plugin-proposal-decorators": "7.10.5",
-      "@babel/plugin-proposal-optional-chaining": "7.11.0",
+  
+      "@babel/eslint-plugin": "7.12.1",
+      "@babel/plugin-proposal-decorators": "7.12.1",
+      "@babel/plugin-proposal-optional-chaining": "7.12.1",
       "babel-eslint": "10.1.0",
       "customize-cra": "1.0.0",
       "eslint-config-airbnb": "18.2.0",
-      "eslint-config-prettier": "6.11.0",
-      "eslint-plugin-import": "2.22.0",
+      "eslint-config-prettier": "6.14.0",
+      "eslint-plugin-import": "2.22.1",
       "eslint-plugin-jsx-a11y": "6.3.1",
       "eslint-plugin-prettier": "3.1.4",
-      "eslint-plugin-react": "7.20.6",
-      "eslint-plugin-react-hooks": "4.1.2",
-      "prettier": "2.1.1",
+      "eslint-plugin-react": "7.21.5",
+      "eslint-plugin-react-hooks": "4.2.0",
+      "prettier": "2.1.2",
       "react-app-rewired": "2.1.6",
-      "webpack-bundle-analyzer": "3.8.0",
-      "husky": "3.1.0",
-      "lint-staged": "9.4.3"
+      "webpack-bundle-analyzer": "3.9.0",
+      "husky": "4.3.0",
+      "lint-staged": "10.4.2"
     }
   }
 }

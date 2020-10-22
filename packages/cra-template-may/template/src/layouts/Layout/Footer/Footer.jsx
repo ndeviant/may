@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AppBar, Container, Toolbar } from '@material-ui/core';
+import { AppBar, Container, Toolbar, Typography } from '@material-ui/core';
 
 const Footer = (props) => {
   return (
     <AppBar position="static" elevation={0} {...props}>
       <Toolbar disableGutters>
-        <Container>Footer</Container>
+        <Container>
+          <Typography variant="h6">Footer</Typography>
+        </Container>
       </Toolbar>
     </AppBar>
   );

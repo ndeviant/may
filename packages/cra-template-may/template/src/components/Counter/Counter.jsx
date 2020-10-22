@@ -1,64 +1,72 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { IconButton, TextField, Typography } from '@material-ui/core';
+import { Add, Remove } from '@material-ui/icons';
 
-import {
-  decrement,
-  increment,
-  incrementByAmount,
-  incrementAsync,
-  selectCount,
-} from 'store/counterSlice';
-
+import Button from 'components/Button';
 import s from './Counter.module.css';
 
-const Counter = () => {
-  const count = useSelector(selectCount);
-  const dispatch = useDispatch();
-  const [incrementAmount, setIncrementAmount] = useState('2');
+const Counter = (props) => {
+  const {
+    value,
+    incrementAmount,
+    onIncrement,
+    onDecrement,
+    onChangeAmount,
+    onIncrementByAmount,
+    onIncrementByAmountAsync,
+  } = props;
 
   return (
     <div>
       <div className={s.row}>
-        <button
+        <IconButton
           className={s.button}
+          color="primary"
           aria-label="Increment value"
-          onClick={() => dispatch(increment())}
+          onClick={onIncrement}
         >
-          +
-        </button>
-        <span className={s.value}>{count}</span>
-        <button
+          <Add />
+        </IconButton>
+        <Typography variant="h5" className={s.value}>
+          {value}
+        </Typography>
+        <IconButton
           className={s.button}
+          color="primary"
           aria-label="Decrement value"
-          onClick={() => dispatch(decrement())}
+          onClick={onDecrement}
         >
-          -
-        </button>
+          <Remove />
+        </IconButton>
       </div>
       <div className={s.row}>
-        <input
+        <TextField
+          variant="outlined"
           className={s.textbox}
           aria-label="Set increment amount"
           value={incrementAmount}
-          onChange={e => setIncrementAmount(e.target.value)}
+          onChange={onChangeAmount}
         />
-        <button
-          className={s.button}
-          onClick={() =>
-            dispatch(incrementByAmount(Number(incrementAmount) || 0))
-          }
-        >
+        <Button className={s.button} onClick={onIncrementByAmount}>
           Add Amount
-        </button>
-        <button
-          className={s.asyncButton}
-          onClick={() => dispatch(incrementAsync(Number(incrementAmount) || 0))}
-        >
+        </Button>
+        <Button className={s.asyncButton} onClick={onIncrementByAmountAsync}>
           Add Async
-        </button>
+        </Button>
       </div>
     </div>
   );
-}
+};
+
+Counter.propTypes = {
+  value: PropTypes.number,
+  incrementAmount: PropTypes.number,
+  onIncrement: PropTypes.func,
+  onDecrement: PropTypes.func,
+  onChangeAmount: PropTypes.func,
+  onIncrementByAmount: PropTypes.func,
+  onIncrementByAmountAsync: PropTypes.func,
+};
 
 export default Counter;

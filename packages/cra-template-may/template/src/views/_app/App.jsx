@@ -7,6 +7,7 @@ import {
 } from '@material-ui/core/styles';
 import { SnackbarProvider } from 'notistack';
 
+import { configureAxios } from 'helpers/axios';
 import createTheme from 'styles/theme';
 import { useGlobalStyles } from 'styles/global';
 import 'styles/vendor/reset.css';
@@ -17,6 +18,8 @@ const jss = create({
   ...jssPreset(),
   insertionPoint: document.getElementById('jss-insertion-point'),
 });
+
+configureAxios();
 
 function App() {
   useGlobalStyles();

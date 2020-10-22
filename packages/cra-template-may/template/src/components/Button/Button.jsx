@@ -1,31 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import { Button as MuiButton, CircularProgress } from '@material-ui/core';
 
-import s from './styled';
+import useStyles from './styles';
 
 const Button = React.forwardRef((props, ref) => {
-  const { children, loading, className, inactive, ...rest } = props;
+  const { children, loading, className, classes, inactive, ...rest } = props;
+
+  const s = useStyles();
 
   return (
-    <s.Button
+    <MuiButton
       ref={ref}
       className={clsx(className, {
-        'Button-loading': loading,
-        'Button-inactive': inactive,
+        [s.loading]: loading,
+        [classes?.loading]: loading,
+        [s.inactive]: inactive,
+        [classes?.inactive]: inactive,
       })}
-      $inactive={inactive || loading}
+      classes={classes}
       {...rest}
     >
       {loading ? (
         <>
-          <s.CircularProgress size="1em" />
-          <s.Hidden>{children}</s.Hidden>
+          <CircularProgress size="1em" />
+          <div className={s.hidden}>{children}</div>
         </>
       ) : (
         children
       )}
-    </s.Button>
+    </MuiButton>
   );
 });
 
@@ -34,6 +39,7 @@ Button.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   inactive: PropTypes.bool,
+  classes: PropTypes.object,
 };
 
 export default Button;

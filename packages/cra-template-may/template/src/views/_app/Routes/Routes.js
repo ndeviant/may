@@ -30,7 +30,7 @@ export const routes = [
 
 const Routes = () => {
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <Switch>
         {routes.map((route) => {
           return <Route key={route.path ?? '*'} {...route} />;

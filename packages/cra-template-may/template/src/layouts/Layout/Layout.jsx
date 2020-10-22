@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import View from 'layouts/View';
-
 import Header from './Header';
 import Footer from './Footer';
 import useStyles from './styles';
@@ -10,20 +8,19 @@ import useStyles from './styles';
 const Layout = (props) => {
   const { children } = props;
 
-  const classes = useStyles();
+  const s = useStyles();
 
   return (
-    <View>
+    <div className={s.view}>
       <Header />
-      <main className={classes.Main}>{children}</main>
+      <main className={s.main}>{children}</main>
       <Footer />
-    </View>
+    </div>
   );
 };
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-  MainDrawer: PropTypes.node,
 };
 
 export default Layout;

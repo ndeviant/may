@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import counterReducer from './counterSlice';
+import counterReducer from './entities/counterSlice';
 
 export default configureStore({
   reducer: {

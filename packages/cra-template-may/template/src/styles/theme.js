@@ -95,15 +95,12 @@ const createTheme = (type = 'light') => {
       MuiSkeleton: {
         animation: 'wave',
       },
-      MuiLink: {
-        underline: 'always',
-      },
       MuiCardActionArea: {
         disableRipple: true,
         focusRipple: true,
       },
       MuiButton: {
-        color: 'secondary',
+        color: 'primary',
         variant: 'contained',
       },
       MuiCheckbox: {
@@ -123,17 +120,9 @@ const createTheme = (type = 'light') => {
       MuiButton: {
         root: {
           borderRadius: '100rem',
-          paddingTop: '0.625rem',
-          paddingBottom: '0.5rem',
         },
         contained: {
           backgroundColor: '#f5f5f5',
-        },
-        text: {
-          padding: '0.625rem 1rem 0.5rem',
-        },
-        outlined: {
-          padding: '0.625rem 1rem 0.5rem',
         },
       },
       MuiTooltip: {
@@ -144,11 +133,6 @@ const createTheme = (type = 'light') => {
         },
         arrow: {
           color: fade(defaultTheme.palette.grey[900], 0.9),
-        },
-      },
-      MuiTableCell: {
-        root: {
-          borderBottomColor: '#fff',
         },
       },
 
