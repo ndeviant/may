@@ -1,6 +1,7 @@
 import { makeStyles } from '@material-ui/core';
+import { memo } from 'react';
 
-const useGlobalStyles = makeStyles((theme) => ({
+const useGlobalStyles = makeStyles(theme => ({
   '@global': {
     html: {
       fontSize: '16px',
@@ -36,4 +37,10 @@ const useGlobalStyles = makeStyles((theme) => ({
   },
 }));
 
-export { useGlobalStyles };
+const GlobalStyles = memo(function GlobalStyles() {
+  useGlobalStyles();
+
+  return null;
+});
+
+export { GlobalStyles, useGlobalStyles };

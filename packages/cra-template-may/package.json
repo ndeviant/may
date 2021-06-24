@@ -1,6 +1,6 @@
 {
   "name": "cra-template-may",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "Nikolai Kolosovskyi",
   "description": "The Redux, Material UI template for Create React App.",
   "keywords": [
@@ -15,9 +15,9 @@
   "main": "template.json",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ndeviant/cra-template-may.git"
+    "url": "https://github.com/ndeviant/may.git"
   },
-  "homepage": "https://github.com/ndeviant/cra-template-may#readme",
+  "homepage": "https://github.com/ndeviant/may#readme",
   "license": "MIT",
   "engines": {
     "node": ">=8"

@@ -1,9 +1,5 @@
 /* eslint-disable no-param-reassign, react-hooks/rules-of-hooks */
-const {
-  override,
-  useBabelRc,
-  addBundleVisualizer,
-} = require('customize-cra');
+const { override, useBabelRc, addBundleVisualizer } = require('customize-cra');
 
 const eslintConfigCRA = {
   rules: {
@@ -11,27 +7,31 @@ const eslintConfigCRA = {
   },
 };
 
-const rewriteEslintConfig = (eslintConfig = {}) => (config) => {
-  const eslintRule = config.module.rules.filter((r) => {
-    return (
-      r.use &&
-      r.use.some((u) => u.options && u.options.useEslintrc !== undefined)
-    );
-  })[0];
+const rewriteEslintConfig = (configRules = {}) => config => {
+  const updatedRules = config.module.rules.map(rule => {
+    // Only target rules that have defined a `useEslintrc` parameter in their options
+    if (
+      rule.use &&
+      // eslint-disable-next-line no-void
+      rule.use.some(use => use.options && use.options.useEslintrc !== void 0)
+    ) {
+      const ruleUse = rule.use[0];
+      const baseOptions = ruleUse.options;
+      const baseConfig = baseOptions.baseConfig || {};
+      const newOptions = {
+        useEslintrc: false,
+        ignore: true,
+        baseConfig: { ...baseConfig, ...configRules },
+      };
+      ruleUse.options = newOptions;
+      return rule;
+    }
 
-  eslintRule.use[0].options.baseConfig = {
-    ...eslintRule.use[0].options.baseConfig,
-    ...eslintConfig,
-  };
-
-  const rules = config.module.rules.map((r) => {
-    return r.use &&
-      r.use.some((u) => u.options && u.options.useEslintrc !== undefined)
-      ? eslintRule
-      : r;
+    // Rule not using eslint. Do not modify.
+    return rule;
   });
-  config.module.rules = rules;
 
+  config.module.rules = updatedRules;
   return config;
 };
 

@@ -9,7 +9,7 @@ import { SnackbarProvider } from 'notistack';
 
 import { configureAxios } from 'helpers/axios';
 import createTheme from 'styles/theme';
-import { useGlobalStyles } from 'styles/global';
+import { GlobalStyles } from 'styles/global';
 import 'styles/vendor/reset.css';
 
 import Routes from './Routes/Routes';
@@ -22,8 +22,6 @@ const jss = create({
 configureAxios();
 
 function App() {
-  useGlobalStyles();
-
   const theme = useMemo(() => {
     return createTheme();
   }, []);
@@ -31,6 +29,7 @@ function App() {
   return (
     <StylesProvider jss={jss}>
       <ThemeProvider theme={theme}>
+        <GlobalStyles />
         <SnackbarProvider maxSnack={3}>
           <Routes />
         </SnackbarProvider>
