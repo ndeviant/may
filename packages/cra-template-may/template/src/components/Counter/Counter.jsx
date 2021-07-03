@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { IconButton, TextField, Typography } from '@material-ui/core';
 import { Add, Remove } from '@material-ui/icons';
 
-import Button from 'components/Button';
+import Button from 'components/mui/Button';
 import s from './Counter.module.css';
 
-const Counter = (props) => {
+const Counter = props => {
   const {
     value,
     incrementAmount,

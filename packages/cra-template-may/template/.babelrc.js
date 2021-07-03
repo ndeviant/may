@@ -8,6 +8,7 @@ const plugins = [
     },
   ],
   '@babel/plugin-proposal-optional-chaining',
+  'babel-plugin-styled-components',
 ];
 
 module.exports = { plugins };

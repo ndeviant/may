@@ -23,6 +23,7 @@ module.exports = {
     'function-paren-newline': 0,
     'implicit-arrow-linebreak': 0,
     'import/extensions': 0,
+    'import/no-anonymous-default-export': 0,
     'import/no-extraneous-dependencies': 0,
     'import/no-unresolved': 0,
     'import/prefer-default-export': 0,

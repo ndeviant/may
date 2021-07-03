@@ -1,46 +1,57 @@
-import { makeStyles } from '@material-ui/core';
-import { memo } from 'react';
+import { createGlobalStyle } from 'styled-components';
 
-const useGlobalStyles = makeStyles(theme => ({
-  '@global': {
-    html: {
-      fontSize: '16px',
-      fontWeight: 400,
-      boxSizing: 'border-box',
-    },
+export const GlobalStyles = createGlobalStyle`
+  html {
+    font-size: 16px;
+    font-weight: 400;
+    box-sizing: border-box;
+  }
 
-    body: {
-      fontSize: '1rem',
-      fontFamily: theme.typography.fontFamily,
-      backgroundColor: 'transparent',
-    },
+  body {
+    font-size: 1rem;
+    font-family: ${props => props.theme.typography.fontFamily};
+    background-color: transparent;
+  }
 
-    a: {
-      textDecoration: 'none',
-    },
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 
-    '[hidden]': {
-      display: 'none !important',
-    },
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
 
-    strong: {
-      fontWeight: 600,
-    },
+  a {
+    text-decoration: none;
+  }
 
-    em: {
-      fontStyle: 'italic',
-    },
+  [hidden] {
+    display: none !important;
+  }
 
-    img: {
-      userSelect: 'none',
-    },
-  },
-}));
+  strong {
+    font-weight: 600;
+  }
 
-const GlobalStyles = memo(function GlobalStyles() {
-  useGlobalStyles();
+  em {
+    font-style: italic;
+  }
 
-  return null;
-});
+  img, svg {
+    user-select: none;
+    height: auto;
+    max-width: 100%;
+  }
 
-export { GlobalStyles, useGlobalStyles };
+  svg {
+    display: block;
+  }
+
+  video {
+    display: block;
+  }
+`;

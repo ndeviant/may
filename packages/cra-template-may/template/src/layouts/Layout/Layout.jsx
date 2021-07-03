@@ -1,21 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import View from 'layouts/View';
+
 import Header from './Header';
 import Footer from './Footer';
-import useStyles from './styles';
+
+import s from './styled';
 
 const Layout = (props) => {
   const { children } = props;
 
-  const s = useStyles();
-
   return (
-    <div className={s.view}>
+    <View>
       <Header />
-      <main className={s.main}>{children}</main>
+      <s.Main>{children}</s.Main>
       <Footer />
-    </div>
+    </View>
   );
 };
 

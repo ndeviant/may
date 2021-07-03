@@ -1,15 +1,13 @@
 import React, { useMemo } from 'react';
 import { create } from 'jss';
-import {
-  StylesProvider,
-  jssPreset,
-  ThemeProvider,
-} from '@material-ui/core/styles';
+import { StylesProvider, jssPreset } from '@material-ui/core/styles';
 import { SnackbarProvider } from 'notistack';
 
 import { configureAxios } from 'helpers/axios';
 import createTheme from 'styles/theme';
 import { GlobalStyles } from 'styles/global';
+import ThemeProvider from 'components/mui/ThemeProvider';
+
 import 'styles/vendor/reset.css';
 
 import Routes from './Routes/Routes';

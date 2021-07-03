@@ -3,11 +3,9 @@ import PropTypes from 'prop-types';
 import { AppBar, Container, Toolbar, Link as MuiLink } from '@material-ui/core';
 import Link from 'components/Link';
 
-import useStyles from './styles';
+import s from './styled';
 
 const Header = (props) => {
-  const s = useStyles();
-
   return (
     <AppBar position="static" elevation={0} {...props}>
       <Container>
@@ -16,27 +14,20 @@ const Header = (props) => {
             Home
           </MuiLink>
 
-          <div className={s.navBox}>
-            <MuiLink
-              className={s.navLink}
-              color="inherit"
-              variant="h6"
-              component={Link}
-              to="/blog"
-            >
+          <s.NavBox>
+            <s.NavLink color="inherit" variant="h6" component={Link} to="/blog">
               Blog
-            </MuiLink>
+            </s.NavLink>
 
-            <MuiLink
-              className={s.navLink}
+            <s.NavLink
               color="inherit"
               variant="h6"
               component={Link}
               to="/not-found"
             >
               404
-            </MuiLink>
-          </div>
+            </s.NavLink>
+          </s.NavBox>
         </Toolbar>
       </Container>
     </AppBar>
