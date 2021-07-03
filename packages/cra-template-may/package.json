@@ -1,6 +1,6 @@
 {
   "name": "cra-template-may",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "Nikolai Kolosovskyi",
   "description": "The Redux, Material UI template for Create React App.",
   "keywords": [
